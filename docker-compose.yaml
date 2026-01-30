@@ -10,13 +10,13 @@ services:
       - APACHE_DOCUMENT_ROOT=/var/www/html
 
   db:
-    image: mariadb:10.3.39
+    build:
+      context: ./docker
+      dockerfile: Dockerfile 
     container_name: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: "projekti"
       MARIABD_DATABASE: "projekti"
-      MARIADB_USER: "projekti"
-      MARIADB_PASSWORD: "projekti"
     ports:
       - "3306:3306"
 
@@ -28,7 +28,7 @@ services:
     ports:
       - "8080:80"
     environment:
-       PMA_HOST: "db"
-       PMA_PORT: 3306
-       PMA_USER: "projekti"
-       PMA_PASSWORD: "projekti"
+      PMA_HOST: "db"
+      PMA_PORT: 3306
+      PMA_USER: "root"
+      PMA_PASSWORD: "projekti"
