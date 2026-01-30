@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ECE4B7;
+}
+
+header {
+    padding: 30px;
+    background-color: #EABE7C;
+    display: flex;
+    justify-content: space-between;
+}
+a {
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.projektitori {
+    font-size:40px;
+    color:white;
+}
+
+
+.main_page {
+    margin: 0;
+    height: 100vh;
+    background: #ECE4B7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.card_container {
+    padding: 2px 16px;
+    margin-top: 10%;
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 100%;
+  border: solid 1.5px #9e9e9e;
+  border-radius: 1rem;
+  background: #ffffff; 
+  padding: 1.25rem 1rem 0.75rem;
+
+  font-size: 1rem;
+  color: #30364F; 
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+
+.user-label {
+  position: absolute;
+  left: 1rem;            
+  top: 50%;
+    transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;    
+  color: #606060;         
+  pointer-events: none;
+  transition: 0.2s ease all;
+  background-color: transparent;
+  padding: 0 0.2em;
+}
+
+.input:focus,
+.input:valid {
+  border: 1.5px solid #1a73e8;
+}
+
+.input:focus ~ .user-label,
+.input:valid ~ .user-label {
+    top: 0;
+  transform: translateY(-50%) scale(0.8);
+  background-color: #ffffff; 
+  color: #1a73e8;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.login_button_div {
+    float: right;
+    width: 40%;
+    margin-top: 10%;
+}
+
+.login_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+    border-radius: 30px;
+    border: 1px solid #8F9092;
+    transition: all 0.2s ease;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #606060;
+    text-shadow: 0 1px #fff;
+}
+
+.login_button:hover {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+}
+
+.login_button:active {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+}
+
+.login_button:focus {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+}

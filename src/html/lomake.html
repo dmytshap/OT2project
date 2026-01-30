@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/styles_lomake.css">
+    <title>Lomake</title>
+</head>
+
+<body>
+    <header>
+        <p class="projektitori"> <a href="main.html">  Projektitori</p>
+        <nav>
+            <a href="lomake.html"> Lomake</a>
+            <a href="otayhteytta.html"> Ota yhteyttä</a>
+            <a href="login.html"> Kirjaudu sisään</a>
+
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1 class="title">Tervetuloa projektilomakkeen</h1>
+        <div class="code_explanation_text_div">
+        <p class="code_explanation_text"> Lähettääkseen lomakkeen tarvitset koodin. Jos sinulla ei ole koodia, lähetä
+            viestiä opettajalle.
+        </div>
+        <div class="form-grid">
+            <div class="input-group">
+                <input type="text" name="yritysnimi" class="input" required autocomplete="off">
+                <label class="user-label">Yrityksen Nimi</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="projektinnimi" class="input" required autocomplete="off">
+                <label class="user-label">Projektin Nimi</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="lyhytkuvaus" class="input" required autocomplete="off">
+                <label class="user-label">Lyhyt kuvaus (näkyy opiskelijalle)</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="pitkakuvaus" class="input" required autocomplete="off">
+                <label class="user-label">Pitkä kuvaus (näkyy opettajalle)</label>
+            </div>
+
+            <div class="input-group label-float">
+                        <input type="date" name="aikavali" class="input" required>
+
+                <label class="user-label">Milloin pitää olla valmis?</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="koodi" class="input" required autocomplete="off">
+                <label class="user-label">Koodi</label>
+            </div>
+        </div>
+
+
+        <div class="container2">
+            <h2> Yhteystiedot</h2>
+            <div class="contact-grid">
+    <div class="input-group">
+        <input type="text" name="sahkoposti" class="input" required autocomplete="off">
+        <label class="user-label">Sähköposti</label>
+    </div>
+
+    <div class="input-group">
+        <input type="text" name="puhelinnumero" class="input" required autocomplete="off">
+        <label class="user-label">Puhelinnumero</label>
+    </div>
+</div>
+        </div>
+        <!--Kun tämä painetaan, ilmoitus menisi main.html korttina ja lisättäisiin gridiin. Gridiin menisi nimi, aika, lyhyt kuvaus ja timestamp (aika, milloin lähetettiin kortin).-->
+        <div class="accept_button_div"> <button class="accept_button" name="acceptbutton"> Lähetä</button> </div>
+    </div>
+
+</body>
+
+</html>
