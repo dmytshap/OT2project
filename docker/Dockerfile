@@ -1,3 +1,4 @@
 # syntax=docker/dockerfile:1
-FROM mariadb:10.3.39
+FROM php:8.2-apache
+RUN docker-php-ext-install mysqli
 COPY init_database.sql /docker-entrypoint-initdb.d/

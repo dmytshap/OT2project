@@ -6,9 +6,11 @@ services:
     container_name: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: "projekti"
-      MARIABD_DATABASE: "projekti"
+      MARIADB_DATABASE: "projekti"
     ports:
       - "3306:3306"
+    volumes:
+      - ./docker/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
 
   web:
     image: php:8.2.30-apache
@@ -21,6 +23,7 @@ services:
       - ./src:/var/www/html
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
+    command: bash -c "docker-php-ext-install mysqli && apache2-foreground"
 
   phpmyadmin:
     image: phpmyadmin
