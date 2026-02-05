@@ -23,14 +23,19 @@ function connectToDatabase()
     $dbpassword = "projekti"; 
     $dbname = "PROJECTS"; 
     
+    try{
+        $connection = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
+    }catch(Exception $e){
+        $error = $e->getMessage();
+        var_dump($error);
+    }
     /** Make connection to database. */
-    $connection = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
     
     /** If connection to database failed, show error */
-    if ($connection->connect_error) {
-        die("Ei onnistunut yhdistää tietokantaan..." . $connection->connect_error);
-    }
-    return $connection;
+    //if ($connection->connect_error) {
+      //  die("Ei onnistunut yhdistää tietokantaan..." . $connection->connect_error);
+    //}
+    //return $connection;
 }
 
 /** Adds form's information to database // not all fields are currently in use.
@@ -93,25 +98,25 @@ function addFormToDatabase()
 function getProjectsFromDatabase() {
 
     $connection = connectToDatabase();
-    $sql = 'SELECT * FROM PROJECT_DATA';
-    $result = $connection->query($sql);
+    //testing with just email
+    $sql = 'SELECT EMAIL FROM PROJECT_DATA';
+    $result = mysqli_query($connection, $sql);
 
-    $num_of_projects = $result->rowCount();
+    $num_of_projects = mysqli_num_rows($result);
 
     if($num_of_projects > 0){
       $projects_arr = array();
         $projects_arr['data'] = array();
         while($row = $statement->fetch_assoc()){
-            $data[] = $row;
-            echo print_r($data);
-            return $data;
+            $project_item = array(
+                'EMAIL' => $email,
+            );
+            array_push($projects_arr['data'], $project_item_item);
         }
-        
-    }else{
-        array_push($projects_arr['data'], 'Ei projekteja');
         return json_encode($projects_arr);
+    }else{
+        echo 'Ei projekteja';
     }
-
 }
 
 
@@ -122,10 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
     getProjectsFromDatabase();
     exit;
-}
-
-getProjectsFromDatabase();
-
+};
 
 
 
