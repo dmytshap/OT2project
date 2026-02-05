@@ -1,6 +1,9 @@
 services:
   web:
-    image: php:8.2.30-apache
+    build:
+      context: ./docker
+      dockerfile: Dockerfile_php_apache
+#    image: php:8.2.30-apache
     container_name: php_apache
     ports:
       - "80:80"
@@ -12,7 +15,7 @@ services:
   db:
     build:
       context: ./docker
-      dockerfile: Dockerfile 
+      dockerfile: Dockerfile_mariadb
     container_name: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: "projekti"
