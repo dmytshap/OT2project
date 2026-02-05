@@ -7,7 +7,7 @@ services:
     container_name: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: "projekti"
-      MARIABD_DATABASE: "projekti"
+#      MARIABD_DATABASE: "projekti"
     ports:
       - "3306:3306"
 
