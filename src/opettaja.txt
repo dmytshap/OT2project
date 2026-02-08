@@ -1,0 +1,4 @@
+hardcoded opettajien sähköpostit
+
+blabla@uef.fi
+opettaja@uef.fi

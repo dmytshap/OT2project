@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirjaudu Sisään </title>
+    <link rel="stylesheet" href="../styles/styles_login.css">
+
+</head>
+
+<body>
+    <header>
+        <p class="projektitori"> <a href="main.html"> Projektitori</p>
+        <nav>
+            <a href="index.html"> Lomake</a>
+            <a href="otayhteytta.html"> Ota yhteyttä</a>
+            <a href="login.htm"> Kirjaudu sisään</a>
+        </nav>
+    </header>
+    <div class="main_page">
+        <form action="backend/authentication_logic.php" method="post">
+        <div class="card_container">
+                <div class="login_main">
+                    <div class="input-group">
+                        <input name="sahkoposti_login"  class="input" type="text" required> 
+                        <label class="user-label">  UEF sähköpostisi </label>
+                    </div>
+                    <div class="input-group">
+                        <input name="salasana_login" class="input"  type="password"> 
+                        <label class="user-label" > OTP CODE</label>
+                    </div>
+                </div>
+                <div class="login_button_div">
+                  <button type="submit" name="action" value="login" class="login_button""> Kirjaudu Sisään</button>
+                </div>
+                <div class="generate_otp_div">
+                    <button type="submit" name="action" value="generate" class="generate_otp_button"> Generoi OTP. </button>
+                    <p>Tämä on siis (session) testiä varten. SEKÄ OTP</p>
+                </div>
+            </div>
+            </div>
+        </form>
+    </div>
+    
+</body>
+
+</html>
