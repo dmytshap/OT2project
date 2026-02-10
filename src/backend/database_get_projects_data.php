@@ -13,6 +13,9 @@ function getProjectsFromDatabase() {
     $num_of_projects = mysqli_num_rows($result);
     if($num_of_projects > 0){
         while($row = $result->fetch_assoc()){
+            //TODO 
+            //Ääkköset eivät tulostu oikein
+            //Missä kohtaa käsitellään, että ääkköset näkyvät oikein
             echo "<div class='project_card'>";
             echo "<div class='card_container'>";
             echo "<div class=title_company'>";

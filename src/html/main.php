@@ -29,8 +29,9 @@
         <div class="grid-projects">
             <?php
                 $url = 'http://localhost/backend/database_get_projects_data.php';
+                //testattu, että toimii myös
                 //$response = file_get_contents($url);
-                //tai 
+                //tai välikappaleen kautta, joka käyttää curlia 
                 $response = fetchApiData($url);
                 echo $response;
             ?>
