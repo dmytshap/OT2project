@@ -1,0 +1,7 @@
+{
+  "name": "ot2project/ot2project",
+  "description": "Development dependencies for OT2project.",
+  "require": {
+    "vlucas/phpdotenv": "^5.6"
+  }
+}
