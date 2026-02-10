@@ -1,7 +1,7 @@
 <?php
-
-
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
     
 //Database Configuration 
 // This file will contain database connection details.
@@ -55,7 +55,7 @@ function addFormToDatabase()
         $connection = connectToDatabase();
 
         $yritysnimi = $_POST['yritysnimi'] ?? '';
-        // $projektinnimi = $_POST['projektinnimi'] ?? '';
+        $projektinnimi = $_POST['projektinnimi'] ?? '';
         $lyhytkuvaus = $_POST['lyhytkuvaus'] ?? '';
         $pitkakuvaus = $_POST['pitkakuvaus'] ?? '';
         //$valmistuspaiva =  $_POST['valmistuspaiva'] ?? '';
@@ -66,13 +66,14 @@ function addFormToDatabase()
 
         // What fields should be added
         $stmt = $connection->prepare(
-            "INSERT INTO PROJECT_DATA (short_desc, phone, email, company, long_desc, CONTACT_TIME) VALUES(?,?,?,?,?,?)"
+            "INSERT INTO PROJECT_DATA (short_desc, project_name, phone, email, company, long_desc, CONTACT_TIME) VALUES(?,?,?,?,?,?,?)"
         );
 
         // Fill in database's fields with variables we got previously from user
     $stmt->bind_param(
-        "ssssss",
+        "sssssss",
         $lyhytkuvaus,
+        $projektinnimi,
         $puhelinnumero,
         $sahkoposti,
         $yritysnimi,
@@ -92,8 +93,6 @@ function addFormToDatabase()
 
     return $newId;
 }
-
-
 
 
 // If server requested POST, run addFormToDatabase()

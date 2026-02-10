@@ -1,3 +1,15 @@
+<!-- Sivu sisäänkirjautumista varten.
+Ei ole täydellistä, sekä bugeja varmasti löytyy.
+Tällä hetkellä toimintaperiaate on:
+Käyttäjä syötää sähköpostin -> Klikkaa generöi OTP -> luodaan koodi -> käyttäjä syöttää koodin ja painaa Kirjaudu sisään -> kirjauttuminen onnistuu.
+
+@uef.fi sähköposti hyväksytään, jos se on hardkoodattu opettaja.txt tiedostoon (ajatus on se, että ainoastaan opettajat voivat käyttää @uef.fi).
+Jos @uef.fi ei ole tiedostossa -> varmaan opiskelija yrittää kirjautua sisään. Tässä tapauksessa tulee viestii että "käytä @student.uef.fi".
+Muut sähköpostit ovat oletettusti yritykset.
+
+Sivun toiminnallisuus on tiedostossa database_user_session.php.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 

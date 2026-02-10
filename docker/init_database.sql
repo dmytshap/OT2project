@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS `PROJECTS`.`PROJECT_DATA` ;
 
 CREATE TABLE IF NOT EXISTS `PROJECTS`.`PROJECT_DATA` (
   `PROJECT_ID` INT NOT NULL AUTO_INCREMENT,
+  `PROJECT_NAME` VARCHAR(100) NOT NULL,
   `SHORT_DESC` VARCHAR(45) NOT NULL,
   `PHONE` VARCHAR(45) NOT NULL,
   `EMAIL` VARCHAR(45) NOT NULL,
@@ -32,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `PROJECTS`.`PROJECT_DATA` (
 -- Insert fake data to PROJECT_DATA
 -- -----------------------------------------------------
 INSERT INTO `PROJECTS`.`PROJECT_DATA`(
+  PROJECT_NAME,
   SHORT_DESC,
   PHONE,
   EMAIL,
@@ -40,7 +42,8 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   RESPOND_BY,
   LONG_DESC
 ) VALUES (
-  "Nettisivu koodausideoiden keräämiseksi"
+  "Nettisivu"
+  ,"Nettisivu koodausideoiden keräämiseksi"
   , "0401234567"
   , "notmymail@hotmail.com"
   , "NotMyCompany"
@@ -48,7 +51,8 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   , NULL
   , "Nettisivun tarkoituksena on kerätä ideoita ja helpottaa opettajan työtä. Lorem ipsum dolores magnificum..."
 ), (
-  "Tämä toinen idea on vielä parempi"
+  "Toinen Idea"
+  ,"Tämä toinen idea on vielä parempi"
   , "0507654321"
   , "yeaah@yeaah.com"
   , "Yaah Company"
@@ -67,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `PROJECTS`.`USER_SESSION` (
   `EMAIL` VARCHAR(45) NOT NULL,
   `OTP_CODE` CHAR(6) NOT NULL,
   `EXPIRY` DATETIME NOT NULL,
+  `ROOLI` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID`)
   );
 
@@ -76,13 +81,16 @@ CREATE TABLE IF NOT EXISTS `PROJECTS`.`USER_SESSION` (
 INSERT INTO `PROJECTS`.`USER_SESSION`(
   EMAIL,
   OTP_CODE,
-  EXPIRY
+  EXPIRY,
+  ROOLI
 ) VALUES (
   "yeaah@yeaah.com"
   , "MINMAX"
-  , ADDTIME(NOW(), '01:00:00') -- Adds 1 hour, time in UTC
+  , ADDTIME(NOW(), '01:00:00')  -- Adds 1 hour, time in UTC
+  , "COMPANY"
 ), (
   "notmymail@hotmail.com"
   , "xAmNIm"
   , ADDTIME(NOW(), '01:01:00') -- Adds 1 hour and 1 minute
+  , "COMPANY" 
 );

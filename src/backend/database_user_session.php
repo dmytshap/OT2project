@@ -1,5 +1,7 @@
 <?php
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 /**
  * Database Connection
@@ -34,10 +36,15 @@ function connectToDatabase()
  * @otp = palauttaa 6 pituinen koodi
  */
 function generateOTPAddUserToDatabase($length = 6) {
+    
     //Yhteys tietokantaan + sähköposti
     $connection = connectToDatabase(); 
     $email = $_POST['sahkoposti_login'] ?? '';
-    
+    $email = strtolower($email);
+    $role = "user";
+    $opettajat_tiedosto = file("../opettaja.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $opettajat_tiedosto = array_map('strtolower', array_map('trim', $opettajat_tiedosto)); //Pitää olla array map että voisimme tarkistaa .txt tiedoston sisältöä in_array() avulla (rivi 64.)
+
     // Tämä osoittii toimivan, kun kokeilin käyttää koodia 10 min päästä.
     // Aika mikä näkyy tietokannassa on se, joka on asetettu palvelimella. 
     // Se ei ole käyttöjärjestelmän aika, jolta lomake lähetetään.
@@ -53,9 +60,25 @@ function generateOTPAddUserToDatabase($length = 6) {
         $otp .= $characters[random_int(0, $maxIndex)];
     }
     
+    // Sähköposti tekstitiedostossa = opettaja
+    if (in_array($email, $opettajat_tiedosto)) {
+        $role = "TEACHER";
+    }
+    elseif (!in_array($email, $opettajat_tiedosto) && str_ends_with($email, '@uef.fi')) {  // Sähköposti päättyy uef.fi:lla, mutta ei ole tiedostossa = ei hyväksytään. Mitä jos joku muu opettaja haluaa kirjautua sisään uef.fi sähköpostilla? Tämä tosiaan ei hyväksy, jos on uef.fi säpö ja se ei olle hardkoodattu tiedostoon.
+        echo 'Jos olet opiskelija, käytä @student.uef.fi sähköpostia.';
+        return false; // Tämä estää että OTP luomisen
+    }
+    elseif (str_ends_with($email, '@student.uef.fi')) { //Opiskelija
+        $role = "STUDENT";
+    }
+    elseif(!str_ends_with($email, '@uef.fi') && !str_ends_with($email, '@student.uef.fi')) { // Yritys
+        $role = "COMPANY";
+    }
+
+
     // Add email and OTP to database
-    $stmt = $connection -> prepare("INSERT INTO USER_SESSION (EMAIL, OTP_CODE, EXPIRY) VALUE (?, ?, ?)");
-    $stmt -> bind_param("sss", $email, $otp, $expiry );
+    $stmt = $connection -> prepare("INSERT INTO USER_SESSION (EMAIL, OTP_CODE, EXPIRY, ROOLI) VALUE (?, ?, ?, ?)");
+    $stmt -> bind_param("ssss", $email, $otp, $expiry, $role);
     
     // Something on the way -> throw exception
     if (!$stmt->execute()) {
@@ -96,8 +119,18 @@ function login_check_user() {
     // Jos $stmt palauttaa rivin, joka pätee, siirrä käyttäjän sivulle, jossa näytetään että kirjautuminen onnistui (tulevaisuudessa voisi siirtää vaikka "minun projektit" sivulle tai vastaavalle). 
     // Jos ei palauttanut, siirrä vaa main sivulle (en jaksanut tehdä erillistä sivua virhettä varten...)
     if ($result && $result->num_rows > 0) {
-        header("Location: /succesfully_loged_in.html");
-    } else {
+    $row = $result->fetch_assoc(); 
+
+    // Tallenna session tiedot 
+    $_SESSION['email'] = $row['EMAIL'];
+    $_SESSION['role']  = $row['ROOLI'];
+    $_SESSION['logged_in'] = true;
+
+    // Onnistunut -> siirrä onnistumissivulle
+    header("Location: /succesfully_loged_in.php");
+    exit;
+        }
+    else {
         header("Location: /virhe.html");
     }
     exit;
@@ -105,16 +138,6 @@ function login_check_user() {
 
 
 /**TODO:
-Lisätä rooli sarake tietokantaan
-Session toteuttaminen... 
-
-jos email on muotoa @student.uef.fi; rooli on opiskelija
-jos email ei ole opettajat.txt:ssä eikä ole @student.uef.fi, kyseessä on yritys
-jos email löytyy opettaja.txt:ssä, kyseessä on opettaja, jolla on kaikki oikeudet.
-perus @uef.fi sähköposti hyväksytään ainoastaan, jos se on hardkoodattu opettaja.txtseen
-
-
-
-Turvallisuutta SQL-injectoneita vasta ja muuta... (myöhässä tulevaisuudessa sit)
+Turvallisuutta SQL-injectoneita vasta ja muuta... (myöhemmin tulevaisuudessa sit)
  */
 ?>
