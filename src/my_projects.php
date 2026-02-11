@@ -1,13 +1,6 @@
-<!-- Tämä sivu näyttää käyttäjän omat projektit. 
- 
- Tämä sivu tulee näkyville, jos käyttäjä on sisäänkirjautunut ja omistaa projekteja. 
-
--->
-
 <?php
 // Tietokannan yhdistämistä varten
 require  'backend/database_projects_data.php';
-
 // jos sessiota ei ole = aloita sellaisen (tämä on bypass, koska tietääkseni session_start on pakko olla jokaisella sivulla missä käyttäjän tiedot tarvitaan?)
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -32,6 +25,9 @@ $projects = $result -> fetch_all(MYSQLI_ASSOC);
 ?>
 
 
+<!-- Tämä sivu näyttää käyttäjän omat projektit. 
+ Tämä sivu tulee näkyville, jos käyttäjä on sisäänkirjautunut ja omistaa projekteja. 
+-->
 <!DOCTYPE html>
 <html lang="en">
 

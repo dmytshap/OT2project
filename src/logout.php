@@ -1,11 +1,10 @@
-<!-- Logout toiminnallisuus. LLM:n tuottama. Vaikutti toimivan. TODO?.-->
-
 <?php
 session_start();       // Start the session 
 session_unset();       // Unset all session variables
 session_destroy();     // Destroy the session completely
 
 // Optionally, clear the session cookie too
+
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(
