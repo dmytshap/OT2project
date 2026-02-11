@@ -16,6 +16,7 @@ function getProjectsFromDatabase() {
             //TODO 
             //Ääkköset eivät tulostu oikein
             //Missä kohtaa käsitellään, että ääkköset näkyvät oikein
+            //Tieto mikä halutaan näyttää $row[Tietokannassa olevan sarakkeen nimi]
             echo "<div class='project_card'>";
             echo "<div class='card_container'>";
             echo "<div class=title_company'>";
