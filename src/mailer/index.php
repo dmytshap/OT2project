@@ -17,7 +17,7 @@ require __DIR__ . '/SMTP.php';
 $autoloadPath = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($autoloadPath)) {
     require $autoloadPath;
-    $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+    $dotenv = Dotenv::createImmutable(__DIR__ , '/../.env');
     $dotenv->safeLoad();
 }
 
