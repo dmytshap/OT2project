@@ -9,10 +9,6 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
 
-require __DIR__ . '/Exception.php';
-require __DIR__ . '/PHPMailer.php';
-require __DIR__ . '/SMTP.php';
-
 //Load Composer's autoloader to enable phpdotenv in dev environments.
 $autoloadPath = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($autoloadPath)) {
