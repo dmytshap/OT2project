@@ -42,7 +42,7 @@ function generateOTPAddUserToDatabase($length = 6) {
     $email = $_POST['sahkoposti_login'] ?? '';
     $email = strtolower($email);
     $role = "user";
-    $opettajat_tiedosto = file("../opettaja.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $opettajat_tiedosto = file("../res/opettaja.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     $opettajat_tiedosto = array_map('strtolower', array_map('trim', $opettajat_tiedosto)); //Pitää olla array map että voisimme tarkistaa .txt tiedoston sisältöä in_array() avulla (rivi 64.)
 
     // Tämä osoittii toimivan, kun kokeilin käyttää koodia 10 min päästä.
@@ -127,7 +127,7 @@ function login_check_user() {
     $_SESSION['logged_in'] = true;
 
     // Onnistunut -> siirrä onnistumissivulle
-    header("Location: /succesfully_loged_in.php");
+    header("Location: /frontend/succesfully_loged_in.php");
     exit;
         }
     else {

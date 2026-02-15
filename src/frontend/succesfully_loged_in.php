@@ -1,5 +1,5 @@
 <?php 
-require 'backend/database_projects_data.php';
+require __DIR__ . '/../backend/database_add_projects_data.php';
 
 // jos sessiota ei ole = aloita sellaisen (tämä on bypass, koska tietääkseni session_start on pakko olla jokaisella sivulla missä käyttäjän tiedot tarvitaan?)
 if (session_status() == PHP_SESSION_NONE) {
@@ -35,10 +35,11 @@ $role = $_SESSION['role'];
 
 <body>
     <header>
-        <p class="projektitori"> <a href="main.html"> Projektitori</a></p>
+        <p class="projektitori"> <a href="main.php"> Projektitori</a></p>
         <nav>
-            <a href="index.html"> Lomake</a>
+            <a href="../index.html"> Lomake</a>
             <a href="otayhteytta.html"> Ota yhteyttä</a>
+            <a href="my_projects.php">My Projects</a>
             <a href="login.html"> Kirjaudu sisään</a>
         </nav>
 
@@ -47,6 +48,6 @@ $role = $_SESSION['role'];
     <h1>Welcome, <?php echo htmlspecialchars($email); ?>!</h1>
     <p>Your role: <?php echo htmlspecialchars($role); ?></p>
 
-    <p><a href="/my_projects.php">Go to My Projects</a></p>
+    <p><a href="my_projects.php">Go to My Projects</a></p>
 </body>
 </html>

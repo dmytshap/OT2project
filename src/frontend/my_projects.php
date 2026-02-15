@@ -1,12 +1,6 @@
-<!-- Tämä sivu näyttää käyttäjän omat projektit. 
- 
- Tämä sivu tulee näkyville, jos käyttäjä on sisäänkirjautunut ja omistaa projekteja. 
-
--->
-
 <?php
 // Tietokannan yhdistämistä varten
-require  'backend/database_projects_data.php';
+require  '../backend/database_add_projects_data.php';
 
 // jos sessiota ei ole = aloita sellaisen (tämä on bypass, koska tietääkseni session_start on pakko olla jokaisella sivulla missä käyttäjän tiedot tarvitaan?)
 if (session_status() == PHP_SESSION_NONE) {
@@ -44,10 +38,11 @@ $projects = $result -> fetch_all(MYSQLI_ASSOC);
 <body>
     <link rel="stylesheet" href="../styles/styles_main.css">
     <header>
-    <p class="projektitori"><a href="main.html">Projektitori</a></p>
+    <p class="projektitori"><a href="main.php">Projektitori</a></p>
     <nav>
-        <a href="index.html">Lomake</a>
-        <a href="otayhteytta.html">Ota yhteyttä</a>
+        <a href="../index.html">Lomake</a>
+        <a href="otayhteytta.html">Ota yhteyttä</a>            
+        <a href="my_projects.php">My Projects</a>
         <a href="logout.php">Kirjaudu ulos</a>
     </nav>
 </header>

@@ -2,7 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-    
+
+require 'connect_to_database.php';
 //Database Configuration 
 // This file will contain database connection details.
 // Also database manipulation functions etc.
@@ -11,30 +12,6 @@ if (session_status() === PHP_SESSION_NONE) {
 // docker build -t ot2project ./docker/
 // docker-compose up -d
 
-
-/**
- * Database Connection
- * @dbservername database's hostname
- * @dbusername what username used to log in in database
- * @dbpassword username's password
- * @dbname name of the database [table]
- */
-function connectToDatabase()
-{
-    $dbservername = "mariadb"; 
-    $dbusername = "root"; 
-    $dbpassword = "projekti"; 
-    $dbname = "PROJECTS"; 
-    
-    /** Make connection to database. */
-    $connection = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
-    
-    /** If connection to database failed, show error */
-    if ($connection->connect_error) {
-        die("Ei onnistunut yhdistää tietokantaan..." . $connection->connect_error);
-    }
-    return $connection;
-}
 
 /** Adds form's information to database // not all fields are currently in use.
  *  @yritysnimi name on company
@@ -61,24 +38,26 @@ function addFormToDatabase()
         //$valmistuspaiva =  $_POST['valmistuspaiva'] ?? '';
         $sahkoposti = $_POST['sahkoposti'] ?? '';
         $puhelinnumero = $_POST['puhelinnumero'] ?? '';
+        $reserved = false;
 
         $timestamp = date("Y-m-d H:i:s");
 
         // What fields should be added
         $stmt = $connection->prepare(
-            "INSERT INTO PROJECT_DATA (short_desc, project_name, phone, email, company, long_desc, CONTACT_TIME) VALUES(?,?,?,?,?,?,?)"
+            "INSERT INTO PROJECT_DATA (short_desc, project_name, phone, email, company, long_desc, CONTACT_TIME, PROJECT_RESERVED) VALUES(?,?,?,?,?,?,?,?)"
         );
 
         // Fill in database's fields with variables we got previously from user
     $stmt->bind_param(
-        "sssssss",
+        "sssssssi",
         $lyhytkuvaus,
         $projektinnimi,
         $puhelinnumero,
         $sahkoposti,
         $yritysnimi,
         $pitkakuvaus,
-        $timestamp
+        $timestamp,
+        $reserved
     );
 
     // If something was on way, throw exception
@@ -98,7 +77,7 @@ function addFormToDatabase()
 // If server requested POST, run addFormToDatabase()
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     addFormToDatabase();
-    header("Location: /success_add_to_database.html");
+    header("Location: /frontend/success_add_to_database.php");
     exit;
 }
 

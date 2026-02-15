@@ -7,11 +7,9 @@ services:
     container_name: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: "projekti"
-      MARIADB_DATABASE: "projekti"
+#      MARIABD_DATABASE: "projekti"
     ports:
-      - "3306:3306"
-    volumes:
-      - ./docker/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
+      - "3307:3306"
 
   phpmyadmin:
     image: phpmyadmin
@@ -26,6 +24,7 @@ services:
       PMA_USER: "root"
       PMA_PASSWORD: "projekti"
 
+
   web:
     build:
       context: ./docker
@@ -38,4 +37,5 @@ services:
       - ./src:/var/www/html
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
-
+    post_start:
+      - command: ["sh", "-c", "/usr/bin/composer install"]

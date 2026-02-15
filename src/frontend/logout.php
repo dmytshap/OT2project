@@ -1,5 +1,3 @@
-<!-- Logout toiminnallisuus. LLM:n tuottama. Vaikutti toimivan. TODO?.-->
-
 <?php
 session_start();       // Start the session 
 session_unset();       // Unset all session variables
