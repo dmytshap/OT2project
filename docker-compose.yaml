@@ -1,9 +1,8 @@
 services:
-
   db:
     build:
       context: ./docker
-      dockerfile: Dockerfile_mariadb
+      dockerfile: Dockerfile
     container_name: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: "projekti"

@@ -26,6 +26,9 @@ $projects = $result -> fetch_all(MYSQLI_ASSOC);
 ?>
 
 
+<!-- Tämä sivu näyttää käyttäjän omat projektit. 
+ Tämä sivu tulee näkyville, jos käyttäjä on sisäänkirjautunut ja omistaa projekteja. 
+-->
 <!DOCTYPE html>
 <html lang="en">
 
