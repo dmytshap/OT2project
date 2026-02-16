@@ -9,7 +9,7 @@ services:
       MARIADB_ROOT_PASSWORD: "projekti"
 #      MARIABD_DATABASE: "projekti"
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
   phpmyadmin:
     image: phpmyadmin
@@ -36,3 +36,5 @@ services:
       - ./src:/var/www/html
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
+    post_start:
+      - command: ["sh", "-c", "/usr/bin/composer install"]

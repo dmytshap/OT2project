@@ -1,12 +1,13 @@
 <?php
 
-require 'database.php';
+require 'connect_to_database.php';
 
 //tämän voisi yhdistää database_projects_data.php tiedostoon
 
 function getProjectsFromDatabase() {
 
     $connection = connectToDatabase();
+    $connection->set_charset("utf8mb4"); 
     $sql = 'SELECT * FROM PROJECT_DATA';
     $result = mysqli_query($connection, $sql);
 

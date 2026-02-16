@@ -14,15 +14,16 @@
 <body>
     <link rel="stylesheet" href="../styles/styles_main.css">
     <header>
-        <p class="projektitori"> <a href="main.html">  Projektitori</p>
+        <p class="projektitori"> <a href="main.php">  Projektitori</p>
         <nav>
-            <a href="lomake.html"> Lomake</a>
+            <a href="../index.html"> Lomake</a>
             <a href="otayhteytta.html"> Ota yhteyttä</a>
+            <a href="my_projects.php">My Projects</a>
             <a href="login.html"> Kirjaudu sisään</a>
         </nav>
     </header>
 
-    <div class="main_page">
+     <div class="main_page">
         <div class="main_text_div">
             <p class="main_text"> Täällä näet kaikki tarjolla olevat projektit. </p>
             <a class="main_text" href="projects_table.php" target="_blank"> Näytä kaikki projektit taulukossa (avautuu uudessa välilehdessä)</a>
