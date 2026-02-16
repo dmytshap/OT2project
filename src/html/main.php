@@ -25,6 +25,7 @@
     <div class="main_page">
         <div class="main_text_div">
             <p class="main_text"> Täällä näet kaikki tarjolla olevat projektit. </p>
+            <a class="main_text" href="projects_table.php" target="_blank"> Näytä kaikki projektit taulukossa (avautuu uudessa välilehdessä)</a>
         </div>
         <div class="grid-projects">
             <?php

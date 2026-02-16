@@ -23,19 +23,18 @@ function connectToDatabase()
     $dbpassword = "projekti"; 
     $dbname = "PROJECTS"; 
     
-    try{
+  
         $connection = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
-    }catch(Exception $e){
-        $error = $e->getMessage();
-        var_dump($error);
-    }
+        //Ääkköset tulostuvat oikein
+        $connection->set_charset("utf8");
+
     /** Make connection to database. */
     
     /** If connection to database failed, show error */
-    //if ($connection->connect_error) {
-      //  die("Ei onnistunut yhdistää tietokantaan..." . $connection->connect_error);
-    //}
-    //return $connection;
+    if ($connection->connect_error) {
+        die("Ei onnistunut yhdistää tietokantaan..." . $connection->connect_error);
+    }
+    return $connection;
 }
 
 /** Adds form's information to database // not all fields are currently in use.
@@ -95,28 +94,27 @@ function addFormToDatabase()
     return $newId;
 }
 
-function getProjectsFromDatabase() {
 
+function setUserSession(string $email) {
+    $sql = '';
+
+}
+
+function getUserSession(string $email) {
     $connection = connectToDatabase();
-    //testing with just email
-    $sql = 'SELECT EMAIL FROM PROJECT_DATA';
+    //Halutaanko kaikki, vai vain milloin umpeutuu?
+    $sql = "'SELECT * FROM USER_SESSION WHERE EMAIL = ' . $email;";
     $result = mysqli_query($connection, $sql);
-
-    $num_of_projects = mysqli_num_rows($result);
-
-    if($num_of_projects > 0){
-      $projects_arr = array();
-        $projects_arr['data'] = array();
-        while($row = $statement->fetch_assoc()){
-            $project_item = array(
-                'EMAIL' => $email,
-            );
-            array_push($projects_arr['data'], $project_item_item);
-        }
-        return json_encode($projects_arr);
+    
+    $session_found = mysqli_num_rows($result);
+    if($session_found > 0 ){
+        //Yhdellä sähköpostilla yksi sessio kerrallaan?
+        $session = $result->fetch_assoc();
+        echo $session;
     }else{
-        echo 'Ei projekteja';
+        echo 'Ei sessiotietoja sähköpostilla';
     }
+    $connection->close();
 }
 
 
@@ -124,10 +122,7 @@ function getProjectsFromDatabase() {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     addFormToDatabase();
     exit;
-}else if($_SERVER['REQUEST_METHOD'] === 'GET'){
-    getProjectsFromDatabase();
-    exit;
-};
+}
 
 
 
