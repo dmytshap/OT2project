@@ -18,13 +18,14 @@ DROP TABLE IF EXISTS `PROJECTS`.`PROJECT_DATA` ;
 
 CREATE TABLE IF NOT EXISTS `PROJECTS`.`PROJECT_DATA` (
   `PROJECT_ID` INT NOT NULL AUTO_INCREMENT
-  , `SHORT_DESC` VARCHAR(140) NOT NULL
-  , `PHONE` VARCHAR(45)
+  , `PROJECT_NAME` VARCHAR(100) NOT NULL
+  , `SHORT_DESC` VARCHAR(45) NOT NULL
+  , `PHONE` VARCHAR(45) NOT NULL
   , `EMAIL` VARCHAR(45) NOT NULL
-  , `COMPANY` VARCHAR(45)
+  , `COMPANY` VARCHAR(45) NOT NULL
   , `CONTACT_TIME` DATETIME NOT NULL
   , `DEADLINE` VARCHAR(45)
-  , `LONG_DESC` LONGTEXT
+  , `LONG_DESC` LONGTEXT NOT NULL
   , `TAG` VARCHAR(45)
   , `PROJECT_RESERVED` BOOLEAN NOT NULL
   , PRIMARY KEY (`PROJECT_ID`)
@@ -34,17 +35,19 @@ CREATE TABLE IF NOT EXISTS `PROJECTS`.`PROJECT_DATA` (
 -- Insert fake data to PROJECT_DATA
 -- -----------------------------------------------------
 INSERT INTO `PROJECTS`.`PROJECT_DATA`(
-  SHORT_DESC
-  , PHONE
-  , EMAIL
-  , COMPANY
-  , CONTACT_TIME
-  , DEADLINE
-  , LONG_DESC
-  , TAG
-  , PROJECT_RESERVED
+  PROJECT_NAME,
+  SHORT_DESC,
+  PHONE,
+  EMAIL,
+  COMPANY,
+  CONTACT_TIME,
+  DEADLINE, 
+  LONG_DESC,
+  TAG,
+  PROJECT_RESERVED
 ) VALUES (
-  "Nettisivu koodausideoiden keräämiseksi"
+  "Nettisivu"
+  ,"Nettisivu koodausideoiden keräämiseksi"
   , "0401234567"
   , "notmymail@hotmail.com"
   , "NotMyCompany"
@@ -54,7 +57,8 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   , "OT2 2027"
   , FALSE
 ), (
-  "Tämä toinen idea on vielä parempi"
+  "Toinen Idea"
+  ,"Tämä toinen idea on vielä parempi"
   , "0507654321"
   , "yeaah@yeaah.com"
   , "Yaah Company"
@@ -75,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `PROJECTS`.`USER_SESSION` (
   , `EMAIL` VARCHAR(45) NOT NULL
   , `OTP_CODE` CHAR(6) NOT NULL
   , `EXPIRY` DATETIME NOT NULL
+  , `ROOLI` VARCHAR(45) NOT NULL
   , PRIMARY KEY (`ID`)
   );
 
@@ -85,15 +90,20 @@ INSERT INTO `PROJECTS`.`USER_SESSION`(
   EMAIL
   , OTP_CODE
   , EXPIRY
+  , ROOLI
 ) VALUES (
   "yeaah@yeaah.com"
   , "MINMAX"
-  , ADDTIME(NOW(), '01:00:00') -- Adds 1 hour, time in UTC
+  , ADDTIME(NOW(), '01:00:00')  -- Adds 1 hour, time in UTC
+  , "COMPANY"
 ), (
   "notmymail@hotmail.com"
   , "xAmNIm"
   , ADDTIME(NOW(), '01:01:00') -- Adds 1 hour and 1 minute
+  , "COMPANY" 
 );
+
+
 
 -- -----------------------------------------------------
 -- Table `PROJECTS`.`PERMANENT_USERS`
@@ -160,5 +170,3 @@ INSERT INTO `PROJECTS`.`INVITES`(
   , ADDTIME(NOW(), '-100:00:00') -- Puts time 100 hours in the past
   , ADDTIME(NOW(), '1:00:00') -- Puts time 1 hour in the past
 );
-
-
