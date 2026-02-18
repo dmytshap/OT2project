@@ -19,10 +19,10 @@ $role = $_SESSION['role'];
 ?>
 
 <!-- Tämä sivu on testausta varten. 
- 
- Tämä sivu tulee näkyville, jos käyttäjän sisäänkirjautuminen onnistui. 
 
- Tulevaisuudessa voisi käyttäjää siirtää toiselle sivulle, jossa olisi sisältöä (esim. "Minun projektit") ? -->
+Tämä sivu tulee näkyville, jos käyttäjän sisäänkirjautuminen onnistui. 
+
+Tulevaisuudessa voisi käyttäjää siirtää toiselle sivulle, jossa olisi sisältöä (esim. "Minun projektit") ? -->
 
 <!DOCTYPE html>
 <html lang="en">

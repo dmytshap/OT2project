@@ -23,7 +23,7 @@
         </nav>
     </header>
 
-     <div class="main_page">
+    <div class="main_page">
         <div class="main_text_div">
             <p class="main_text"> Täällä näet kaikki tarjolla olevat projektit. </p>
         </div>
