@@ -35,7 +35,7 @@
     <th>Projekti varattu</th>
 
     <?php
-        $url = 'http://localhost/backend/database_get_projects_table.php';
+        $url = 'http://localhost/backend/database_get_projects_data.php';
         //returns json
         $response = file_get_contents($url);
         //decodes json into array

@@ -31,11 +31,31 @@
         <div class="grid-projects">
             <?php
                 $url = 'http://localhost/backend/database_get_projects_data.php';
-                //testattu, että toimii myös
-                //$response = file_get_contents($url);
-                //tai välikappaleen kautta, joka käyttää curlia 
-                $response = fetchApiData($url);
-                echo $response;
+             
+                $response = file_get_contents($url);
+
+                $data = json_decode($response, true);
+                foreach($data as $row){
+                               echo "<div class='project_card'>";
+            echo "<div class='card_container'>";
+            echo "<div class=title_company'>";
+            echo "<p class='project_name'> -Projektin nimi-</p>";
+            echo "<p class='company'> $row[COMPANY] </p>";
+            echo "</div>";
+            echo "<div class='project_description_comprehensive'>";
+            echo "<p id='project_description_title'> Projektin kuvaus</p>";
+            echo "<p class='project_description'> $row[SHORT_DESC]</p>";
+            echo "<p id='aikavali_text'>Aikaväli</p>";
+            echo "<p class='aikavali'> 01.01.2026-31.12.2026</p>";
+            echo "<p id='posted'> Julkaistu</p>";
+            echo "<p class='date_posted'> $row[CONTACT_TIME]</p>";
+            echo "<div class='card_button'>";
+            echo "<button class='otayhteytta'> Ota yhteyttä </button>";
+            echo "</div>";
+            echo "</div>";
+            echo "</div>";
+            echo "</div>";
+                }
             ?>
         </div>
     </div>
