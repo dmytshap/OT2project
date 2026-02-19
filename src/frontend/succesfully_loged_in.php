@@ -37,7 +37,7 @@ $role = $_SESSION['role'];
     <header>
         <p class="projektitori"> <a href="main.php"> Projektitori</a></p>
         <nav>
-            <a href="../index.html"> Lomake</a>
+            <a href="../index.php"> Lomake</a>
             <a href="otayhteytta.html"> Ota yhteyttä</a>
             <a href="my_projects.php">My Projects</a>
             <a href="login.html"> Kirjaudu sisään</a>

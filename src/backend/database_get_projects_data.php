@@ -7,7 +7,6 @@ require 'connect_to_database.php';
 function getProjectsFromDatabase() {
 
     $connection = connectToDatabase();
-    $connection->set_charset("utf8mb4"); 
     $sql = 'SELECT * FROM PROJECT_DATA';
     $result = mysqli_query($connection, $sql);
 
