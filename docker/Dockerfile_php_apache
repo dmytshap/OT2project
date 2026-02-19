@@ -12,5 +12,3 @@ RUN apt-get update && apt-get install -y \
 
 # Install composer
 COPY --from=composer/composer:2.2-bin /composer /usr/bin/composer
-
-
