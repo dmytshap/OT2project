@@ -131,7 +131,7 @@ if (isset($_POST['acceptbutton'])) {
                 </div>
             </div>
             <div class="button_container">
-                <button class="invite_button" name="inviteButton" type="submit" onClick="alertUser()" value=" Show alert Box">
+                <button class="invite_button" name="inviteButton" type="submit" formnovalidate onClick="alertUser()" value=" Show alert Box">
                     Kutsu </button>
                 <!--Kun tämä painetaan, ilmoitus menisi main.html korttina ja lisättäisiin gridiin. Gridiin menisi nimi, aika, lyhyt kuvaus ja timestamp (aika, milloin lähetettiin kortin).-->
                 <button class="accept_button" name="acceptbutton" type="submit">
