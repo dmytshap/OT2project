@@ -23,7 +23,7 @@ if (isset($_GET['token'])) {
     $token = htmlspecialchars($_GET['token']);
 
     $connection = connectToDatabase();
-    $stmt = $connection->prepare("SELECT TOKEN FROM INVITES WHERE TOKEN = ? AND TOKEN_EXPIRY > NOW()");
+    $stmt = $connection->prepare("SELECT TOKEN FROM INVITE_LINKS WHERE TOKEN = ? AND TOKEN_EXPIRY > NOW()");
     $stmt->bind_param("s", $token);
     $stmt->execute();
 
