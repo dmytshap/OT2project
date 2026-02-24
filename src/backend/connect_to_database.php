@@ -15,8 +15,7 @@ function connectToDatabase()
     
     /** Make connection to database. */
     $connection = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
-    //charsetin voi määrittää täällä jo, niin ei eri tiedostoissa tarvitse määrittää erikseen
-    $connection->set_charset("utf8mb4"); 
+    $connection -> set_charset("utf8mb4");
     
     /** If connection to database failed, show error */
     if ($connection->connect_error) {
