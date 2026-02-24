@@ -8,10 +8,8 @@ header {
     display: flex;
     justify-content: space-between;
 }
-a {
-    text-decoration: none;
-    color:rgb(255, 255, 255);
-    padding: 10px;
+.navbar-brand{
+    padding-left: 10px !important;
 }
 
 .projektitori {
@@ -19,9 +17,6 @@ a {
     color:white;
 }
 
-.main_page {
-    background-color: #fff; 
-}
 h2 {
     font-weight: bold;
     color: black;

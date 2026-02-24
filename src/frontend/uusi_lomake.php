@@ -38,6 +38,12 @@
         </nav>
       
     <div class="container mt-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="breadcrumb-ptori" href="uusi_main.php">Projektitori</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Lomake</li>
+            </ol>
+        </nav>
         <div class="col-lg-8 col-xl-7">
             <h2 class="lomake_teksti mb-4"> Projektilomake </h2>    
             <p class="alateksti mb-4">Lähetä projekti-ideasi projektitorille tällä lomakkeella. </p>
