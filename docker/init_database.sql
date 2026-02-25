@@ -170,3 +170,28 @@ INSERT INTO `PROJECTS`.`INVITES`(
   , ADDTIME(NOW(), '-100:00:00') -- Puts time 100 hours in the past
   , ADDTIME(NOW(), '1:00:00') -- Puts time 1 hour in the past
 );
+-- -----------------------------------------------------
+-- Table PROJECTS.INVITE_LINKS
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS PROJECTS.INVITE_LINKS ;
+
+CREATE TABLE IF NOT EXISTS PROJECTS.INVITE_LINKS (
+  TOKEN VARCHAR(45) NOT NULL
+  , TOKEN_EXPIRY DATETIME NOT NULL
+  , PRIMARY KEY (TOKEN)
+  );
+
+
+-- -----------------------------------------------------
+-- Insert fake data to INVITES_LINKS
+-- -----------------------------------------------------
+INSERT INTO PROJECTS.INVITE_LINKS(
+  TOKEN
+  , TOKEN_EXPIRY
+) VALUES (
+  "testerToken"
+  , ADDTIME(NOW(), '1:00:00')
+), (
+  "k4%fl"
+  , ADDTIME(NOW(), '1:00:00') 
+);

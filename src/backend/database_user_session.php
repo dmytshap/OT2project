@@ -13,13 +13,10 @@ function generateOTPAddUserToDatabase($length = 6)
 
     //Yhteys tietokantaan + sähköposti
     $connection = connectToDatabase();
-    $email = $_POST['sahkoposti_login'] ?? '';
+    $email = $_POST['input-email'] ?? '';
     $email = strtolower($email);
     $role = "user";
-    $opettajat_tiedosto = file("../res/opettaja.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    $opettajat_tiedosto = array_map('strtolower', array_map('trim', $opettajat_tiedosto)); //Pitää olla array map että voisimme tarkistaa .txt tiedoston sisältöä in_array() avulla (rivi 64.)
-
-
+    
     // Tämä osoittii toimivan, kun kokeilin käyttää koodia 10 min päästä.
     // Aika mikä näkyy tietokannassa on se, joka on asetettu palvelimella. 
     // Se ei ole käyttöjärjestelmän aika, jolta lomake lähetetään.
@@ -35,13 +32,19 @@ function generateOTPAddUserToDatabase($length = 6)
         $otp .= $characters[random_int(0, $maxIndex)];
     }
 
-    // Sähköposti tekstitiedostossa = opettaja
-    if (in_array($email, $opettajat_tiedosto)) {
+    // Statement for checking if PERMANENT_USERS has a specific row with $email.
+    $stmt_check_teacher = $connection -> prepare("SELECT * FROM PERMANENT_USERS WHERE EMAIL = ? LIMIT 1");
+    $stmt_check_teacher -> bind_param("s", $email);
+    $stmt_check_teacher->execute();
+    $stmt_check_teacher->store_result();
+
+    // stmt_check_teacher palauttaa True = löytyy taulukossa Permanent_Users = opettaja
+    if (str_ends_with($email, 'uef.fi') && $stmt_check_teacher->num_rows > 0) {
         $role = "TEACHER";
-    } elseif (!in_array($email, $opettajat_tiedosto) && str_ends_with($email, '@uef.fi')) {  // Sähköposti päättyy uef.fi:lla, mutta ei ole tiedostossa = ei hyväksytään. Mitä jos joku muu opettaja haluaa kirjautua sisään uef.fi sähköpostilla? Tämä tosiaan ei hyväksy, jos on uef.fi säpö ja se ei olle hardkoodattu tiedostoon.
+    } elseif (str_ends_with($email, 'uef.fi') && !$stmt_check_teacher->num_rows > 0) {
         $_SESSION['error'] = 'Jos olet opiskelija, käytä @student.uef.fi sähköpostia.';
         header("Location: /frontend/login.html");
-        exit; // Tämä estää että OTP luomisen
+        exit; // Tämä estää että OTP luodaan
     } elseif (str_ends_with($email, '@student.uef.fi')) { //Opiskelija
         $role = "STUDENT";
     } elseif (!str_ends_with($email, '@uef.fi') && !str_ends_with($email, '@student.uef.fi')) { // Yritys
@@ -68,8 +71,8 @@ function login_check_user()
 {
     // Yhteys tietokantaan + sähköposti + OTP
     $connection = connectToDatabase();
-    $email = $_POST['sahkoposti_login'] ?? '';
-    $otp = $_POST['salasana_login'] ?? '';
+    $email = $_POST['input-email'] ?? '';
+    $otp = $_POST['input-OTP'] ?? '';
 
     // Jos jotain puuttuu, heitä errori
     // HTML:n puolella ne ovat kuitenkin required.

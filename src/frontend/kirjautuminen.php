@@ -26,9 +26,14 @@
                 <form action="/backend/authentication_logic.php" method="post">
                     <div class="form-group mb-3">
                         <label for="inputEmail" class="form-label">Sähköposti</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                        <input type="email" class="form-control" id="inputEmail" name="input-email" placeholder="name@example.com">
+                        <label for="inputOTP" class="form-label">OTP Koodisi</label>
+                        <input type="code" class="form-control" id="inputOTP" name="input-OTP" placeholder="A1B2!">
                     </div>
+                    <div class="d-flex gap-3 mt-3">
                     <button type="submit" name="action" value="generate" class="btn-laheta px-5 py-2">Lähetä koodi</button>
+                    <button type="submit" name="action" value="login" class="btn-laheta px-5 py-2"> Kirjaudu Sisään </button>
+</div>
                 </form>
             </div>
         </div>
