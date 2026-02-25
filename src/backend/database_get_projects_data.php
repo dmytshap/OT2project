@@ -5,10 +5,12 @@ require 'connect_to_database.php';
 function getProjectFromDatabase($id){
     $connection = connectToDatabase();
 
-    $sql = "SELECT * FROM PROJECT_DATA WHERE PROJECT_ID = $id";
-    $result = mysqli_query($connection, $sql);
+    $stm = $connection -> prepare("SELECT * FROM PROJECT_DATA WHERE PROJECT_ID = ?");
+    $stm->bind_param("s", $id);
+    $stm->execute();
+    $result = $stm->get_result();
 
-    $num_of_projects = mysqli_num_rows($result);
+    $num_of_projects = $result->num_rows;
 
     if ($num_of_projects > 0) {
         $row = $result->fetch_assoc();
@@ -24,10 +26,11 @@ function getProjectsFromDatabase(){
 
     $connection = connectToDatabase();
 
-    $sql = 'SELECT * FROM PROJECT_DATA';
-    $result = mysqli_query($connection, $sql);
+    $stm = $connection->prepare('SELECT * FROM PROJECT_DATA');
+    $stm->execute();
+    $result = $stm->get_result();
 
-    $num_of_projects = mysqli_num_rows($result);
+    $num_of_projects = $result->num_rows;
 
     $response = array();
     if ($num_of_projects > 0) {
