@@ -4,6 +4,21 @@ session_start();
 require 'database_user_session.php';
 
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
+
+
+// Composerin autoloader, jotta phpdotenv toimii
+$autoloadPath = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoloadPath)) {
+    require $autoloadPath;
+    $dotenv = Dotenv::createImmutable(__DIR__ , '/../.env');
+    $dotenv->safeLoad();
+}
+
+
 // Tuleeko add vai login actioni
 $action = $_POST['action'] ?? '';
 
@@ -13,10 +28,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Jos action on Generate, kutsu generateOTPAddUserToDatabase()
     if ($action == 'generate') {
         $otp = generateOTPAddUserToDatabase();
+        $email = $_POST['sahkoposti_login'] ?? '';
+        $mailStatusMessage = 'Sähköpostia ei voitu lähettää, mutta OTP-koodi luotiin.';
+
+        if ($otp && $email) {
+            $mail = new PHPMailer(true);
+
+            try {
+                $mail->SMTPDebug = SMTP::DEBUG_OFF;
+                $mail->isSMTP();
+                $mail->Host       = $_ENV['SMTP_HOST'] ?? '';
+                $mail->Port       = $_ENV['SMTP_PORT'] ?? '';
+                $mail->SMTPAuth   = $_ENV['SMTP_AUTH'] ?? '';
+                $mail->Username   = $_ENV['SMTP_USER'] ?? '';
+                $mail->Password   = $_ENV['SMTP_PASSWORD'] ?? '';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+
+                $mail->setFrom('projektitori@moimail.uk', 'Projektitori');
+                $mail->addAddress($email);
+
+                $mail->CharSet = 'UTF-8';
+                $mail->isHTML(true);
+                $mail->Subject = 'OTP-koodi kirjautumiseen';
+                $mail->Body    = 'Kirjautumisen OTP-koodisi on: <b>' . htmlspecialchars($otp) . '</b>.';
+
+                $mail->send();
+                $mailStatusMessage = 'Sähköpostipalvelin toimii. OTP-koodi lähetettiin sähköpostiin.';
+            } catch (Exception $e) {
+                $mailStatusMessage = "OTP-koodia ei voitu lahettaa. Mailer Error: {$mail->ErrorInfo}";
+            }
+        }
         
-        // Rivi alhaalla on testausta varten, tarkistin, että kaikki toimii ja OTP oikeasta generoidaan. Tämän pitäisi sit lähettää SMTP:n kautta sähköpostille. 
-        // Pitäskö koodin lähettäminen toteuttaa tässä if lausekkeessa vai generateOTPAddUserToDatabase() metodissa? 
-        echo "Sinun OTP koodi on: $otp";  
+        echo "$mailStatusMessage<br>";
+        echo "Sinun OTP koodi on: $otp";
         exit;
     }
     //Jos action on login, kutsu login_check_user()
