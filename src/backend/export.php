@@ -2,6 +2,7 @@
 
 require_once 'connect_to_database.php';
 
+
 function export()
 {
     $connection = connectToDatabase();
@@ -70,6 +71,7 @@ function export()
         header('Content-Disposition: attachment; filename="' . $filename . '";');
         //makes ä, ö etc. appear properly in csv
         echo "\xEF\xBB\xBF";
+
 
         fpassthru($f);
     } else {

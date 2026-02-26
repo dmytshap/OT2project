@@ -8,11 +8,11 @@ include '../backend/api-fetcher.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/styles_main.css">
     <title>Projektitori</title>
 </head>
 
 <body>
-    <link rel="stylesheet" href="../styles/styles_main.css">
     <header>
         <p class="projektitori"> <a href="main.php"> Projektitori</p>
         <nav>
@@ -36,10 +36,9 @@ include '../backend/api-fetcher.php';
 
             $data = json_decode($response, true);
             foreach ($data as $row) {
-                //some values are still hardcoded, what do we want to display in these?
                 echo "<div class='project_card'>";
                 echo "<div class='card_container'>";
-                echo "<div class=title_company'>";
+                echo "<div class='title_company'>";
                 echo "<p class='project_name'> -Projektin nimi-</p>";
                 echo "<p class='company'> $row[COMPANY] </p>";
                 echo "</div>";
@@ -55,6 +54,7 @@ include '../backend/api-fetcher.php';
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";
+                echo "<a style='color: blue;' href='project.php?id=$row[PROJECT_ID]'>Katso projektin kaikki tiedot</a>";
                 echo "</div>";
             }
             ?>
