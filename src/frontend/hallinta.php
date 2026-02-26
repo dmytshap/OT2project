@@ -31,7 +31,7 @@ $result = mysqli_query($connection, $sql);
                         <a class="nav-link" href="uusi_lomake.php">Lomake</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="hallinta.php">Hallinta</a>
+                        <a class="nav-link active" aria-current="page" href="hallinta.php">Projektien hallinta</a>
                         </li>
                         <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -50,7 +50,7 @@ $result = mysqli_query($connection, $sql);
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a class="breadcrumb-ptori" href="uusi_main.php">Projektitori</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Hallinta</li>
+                <li class="breadcrumb-item active" aria-current="page">Projektien hallinta</li>
             </ol>
         </nav>
         <h2 class="main_text mb-4">Projektien hallinta</h2>
@@ -150,8 +150,6 @@ $result = mysqli_query($connection, $sql);
             rowCheckboxes.forEach(cb => cb.checked = selectAll.checked);
             updateBulkActions();
         });
-    </script>
-
     </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 body {
     font-family: 'Inter', Arial, sans-serif;
+    padding-bottom: 30px;
 }
 
 header {
@@ -23,20 +24,30 @@ h2 {
     padding-top: 30px;
     padding-bottom: 30px;
 }
-.btn-otayhteytta {
+.btn-tiedot {
     background-color: #067493;
     border-color: #067493;
     color: white;
     border-radius: 20px;
     border: none;
+    text-decoration: none;
 }
-.btn-otayhteytta:hover {
+.btn-tiedot:hover {
     background-color: #055d75;
+    color: white;
+    text-decoration: none;
+}
+.card-link{
+    text-decoration: none;
+    color: black;
+}
+.card-link:hover{
+    text-decoration: none;
+    color: black;
 }
 
 .card {
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {

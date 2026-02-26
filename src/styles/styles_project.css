@@ -2,6 +2,7 @@ body {
     font-family: 'Inter', Arial, sans-serif;
     padding-bottom: 30px;
 }
+
 header {
     padding: 30px;
     background-color: #000000;
@@ -11,16 +12,9 @@ header {
 .navbar-brand{
     padding-left: 10px !important;
 }
-
-.btn-laheta {
-    background-color: #067493;
-    border-color: #067493;
-    color: white;
-    border-radius: 20px;
-    border: none;
-}
-.btn-laheta:hover {
-    background-color: #055d75;
+.projektitori {
+    font-size:40px;
+    color:white;
 }
 
 h2 {
@@ -28,6 +22,17 @@ h2 {
     color: black;
     padding-top: 30px;
 }
+.valiotsikko{
+    font-weight: bold;
+    color: #067493;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
 p{
-    padding-bottom: 60px;
+    max-width: 800px;
+}
+.yritysnimi{
+    font-weight: bold;
+    color: #067493;
+    padding-bottom: 30px;
 }

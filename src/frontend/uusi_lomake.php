@@ -21,7 +21,7 @@
                         <a class="nav-link active" aria-current="page" href="uusi_lomake.php">Lomake</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="hallinta.php">Hallinta</a>
+                        <a class="nav-link" href="hallinta.php">Projektien hallinta</a>
                         </li>
                         <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">

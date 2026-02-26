@@ -2,6 +2,12 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+require_once '../backend/connect_to_database.php';
+$connection = connectToDatabase();
+$sql = 'SELECT * FROM INVITE_LINKS';
+$result = mysqli_query($connection, $sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <title>Lomake</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/uusi_styles_lomake.css">
+    <link rel="stylesheet" href="../styles/styles_admin_panel.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 fw-semibold sticky-top">
@@ -26,7 +32,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <a class="nav-link active" aria-current="page" href="uusi_lomake.php">Lomake</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="hallinta.php">Hallinta</a>
+                        <a class="nav-link" href="hallinta.php">Projektien hallinta</a>
                         </li>
                         <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,17 +46,17 @@ if (session_status() === PHP_SESSION_NONE) {
                     </ul>
                     </div>
                 </div>
-        </nav>
-      
+    </nav>
     <div class="container mt-4">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="breadcrumb-ptori" href="uusi_main.php">Projektitori</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Lomake</li>
-            </ol>
-        </nav>
-        <!---Notification--->
-        <?php if (isset($_SESSION['message'])): ?>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="breadcrumb-ptori" href="uusi_main.php">Projektitori</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Admin</li>
+        </ol>
+    </nav>
+    <h2 class="main_text mb-4">Admin</h2>
+    <!---Notification--->
+    <?php if (isset($_SESSION['message'])): ?>
     <div class="alert alert-<?php echo $_SESSION['message_type']; ?>">
         <?php 
             echo $_SESSION['message']; 
@@ -58,19 +64,89 @@ if (session_status() === PHP_SESSION_NONE) {
             unset($_SESSION['message_type']);
         ?>
     </div>
-<?php endif; ?>
-     <form action = "/backend/admin_features.php" method="post" class="row g-4">
-                <div class="col-md-6">
-                    <label for="inputProjektiNimi" class="form-label">Opettajan sähköposti (vain @uef.fi)</label>
-                    <input type="text" class="form-control" name="teacher_email" id="teacherEmail" placeholder="Syötä opettajan sähköposti">
-                    <button class="btn-laheta px-5 py-2"  id="addTeacher" name="add_teacher"> Lisää opettaja </button>
-                    <button class="btn-laheta px-5 py-2"  id="deleteTeacher" name="delete_teacher" > Poista opettaja </button>
+    <?php endif; ?>
+    <h4 class= "valiotsikko">Opettajien hallinta</h4>
+    <form action = "/backend/admin_features.php" method="post" class="row g-4">
+        <div class="col-md-6">
+            <label for="inputProjektiNimi" class="form-label">Opettajan sähköposti (vain @uef.fi)</label>
+            <input type="text" class="form-control" name="teacher_email" id="teacherEmail" placeholder="Syötä opettajan sähköposti">
+            <button class="btn-lisaa-opettaja px-5 py-2"  id="addTeacher" name="add_teacher"> Lisää opettaja </button>
+            <button class="btn-poista-opettaja px-5 py-2"  id="deleteTeacher" name="delete_teacher" > Poista opettaja </button>
 
-                </div>
-            </form>
+        </div>
+    </form>
+        <h4 class= "valiotsikko">Kutsulinkit</h4>
+        <div class="button-div d-flex align-items-center justify-content-between w-100 mb-2">
+            <h6 class="aktiiviset-kutsulinkit mb-0">Aktiiviset kutsulinkit</h6>
+            <button class="btn-kutsulinkki px-5 py-2" id="luoKutsulinkki" name="luoKutsulinkki">Luo uusi kutsulinkki</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover shadow">
+                <thead>
+                    <tr>
+                    <th scope="col"><input class='form-check-input' type="checkbox" id="select-all" /></th>    
+                    <th scope="col">Token</th>
+                    <th scope="col">Vanhenemisaika</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <?php
+                    while($row = mysqli_fetch_assoc($result)){
 
+                        echo "<tr>
+                            <th scope='col'><input class='form-check-input row-checkbox' type='checkbox' /></th>
+                            <td>$row[TOKEN]</td>
+                            <td>$row[TOKEN_EXPIRY]</td>
+                        </tr> ";
 
-<body>
-    
+                    }
+                    
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div id="toolbar" class="toolbar d-none d-flex shadow justify-content-between align-items-center p-3 bg-light border rounded mt-2">
+            <span id="selected-count">1 valittu</span>
+            <div class="scroll">
+                <button id="btn-poista" class="btn btn-poista">Poista käytöstä</button>
+            </div>
+        </div>
+    </div>
+      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>        
+       
+    <!-- Tekoälyn luoma koodi, toolbar tulee näkyville, kun valitaan 1 tai useampi checkbox -->
+    <script>
+        
+        const selectAll = document.getElementById('select-all');
+        const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+        const toolbar = document.getElementById('toolbar');
+        const selectedCount = document.getElementById('selected-count');
+
+        function updateToolbar() {
+            // montako checkboxia on valittu
+            const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
+            const count = checkedBoxes.length;
+
+            if (count > 0) {
+                // asetetaan toolbar näkyväksi ja päivitetään teksti sen mukaan, montako on valittu
+                toolbar.classList.remove('d-none');
+                selectedCount.textContent = `${count} valittu`;
+            } else {
+                toolbar.classList.add('d-none');  // piilotetaan toolbar
+                selectedCount.textContent = '0 valittu';
+            }
+
+            //update select-all checkbox
+            selectAll.checked = count === rowCheckboxes.length;
+        }
+
+        // Add event listeners to all checkboxes
+        rowCheckboxes.forEach(cb => cb.addEventListener('change', updateToolbar));
+        selectAll.addEventListener('change', function() {
+            rowCheckboxes.forEach(cb => cb.checked = selectAll.checked);
+            updateToolbar();
+        });
+    </script>
 </body>
 </html>

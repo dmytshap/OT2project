@@ -26,7 +26,7 @@
                         <a class="nav-link" href="uusi_lomake.php">Lomake</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="hallinta.php">Hallinta</a>
+                        <a class="nav-link" href="hallinta.php">Projektien hallinta</a>
                         </li>
                         <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,6 +53,7 @@
                 $data = json_decode($response, true);
                 foreach ($data as $row) {
                     echo "<div class='col-md-3 mb-4'>";
+                    echo "<a class='card-link' href='project.php?id=$row[PROJECT_ID]'>";
                     echo "<div class='card h-100 shadow'>";
                     echo "<div class='card-body d-flex flex-column'>";
                     echo "<h5 class='card-title'> $row[PROJECT_NAME] </h5>";
@@ -61,10 +62,11 @@
                     echo "<p class='mb-1'><strong>Aikaväli:</strong> 01.01.2026 - 31.12.2026</p>";
                     echo "<p class='mb-3'><strong>Julkaistu:</strong> $row[CONTACT_TIME] </p>";
                     echo "<div class='mt-auto d-flex justify-content-center'>";
-                    echo "<button class='btn-otayhteytta px-5 py-2'>Ota yhteyttä</button>";
+                    echo "<a class='btn-tiedot px-5 py-2' href='project.php?id=$row[PROJECT_ID]'>Näytä tiedot</a>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";
+                    echo "</a>";
                     echo "</div>";
                 }
                 ?>
