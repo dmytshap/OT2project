@@ -40,6 +40,21 @@ h2 {
     background-color: #800505;
     color: white;
 }
+
+.btn-kopioi {
+    background-color: #067493;
+    border-color: #067493;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    min-width: 100px;
+}
+.btn-kopioi:hover {
+    background-color: #067493;
+    color: white;
+}
+
+
 .scroll {
     display: flex;
     gap: 1rem;      
