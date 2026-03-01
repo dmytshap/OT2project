@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `PROJECTS`.`PROJECT_DATA` (
   , `LONG_DESC` LONGTEXT NOT NULL
   , `TAG` VARCHAR(45)
   , `PROJECT_RESERVED` BOOLEAN NOT NULL
+  , `RESERVED_TO` VARCHAR(150)
   , PRIMARY KEY (`PROJECT_ID`)
   );
 
@@ -44,7 +45,8 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   DEADLINE, 
   LONG_DESC,
   TAG,
-  PROJECT_RESERVED
+  PROJECT_RESERVED,
+  RESERVED_TO,
 ) VALUES (
   "Nettisivu"
   ,"Nettisivu koodausideoiden keräämiseksi"
@@ -56,6 +58,7 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   , "Nettisivun tarkoituksena on kerätä ideoita ja helpottaa opettajan työtä. Lorem ipsum dolores magnificum..."
   , "OT2 2027"
   , FALSE
+  , "RYHMÄ LMMOST"
 ), (
   "Toinen Idea"
   ,"Tämä toinen idea on vielä parempi"
