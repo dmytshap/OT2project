@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="textareaAikataulu" class="form-label">Aikataulu</label>
-                    <textarea class="form-control" id="aikataulu" rows="1" placeholder="Milloin projektin tulee olla valmis?"></textarea>
+                    <textarea class="form-control" name="aikataulu" id="textareaAikataulu" rows="1" placeholder="Milloin projektin tulee olla valmis?"></textarea>
                 </div>
         
                 <div class="col-md-6">
