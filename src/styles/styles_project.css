@@ -1,0 +1,38 @@
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    padding-bottom: 30px;
+}
+
+header {
+    padding: 30px;
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+}
+.navbar-brand{
+    padding-left: 10px !important;
+}
+.projektitori {
+    font-size:40px;
+    color:white;
+}
+
+h2 {
+    font-weight: bold;
+    color: black;
+    padding-top: 30px;
+}
+.valiotsikko{
+    font-weight: bold;
+    color: #067493;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+p{
+    max-width: 800px;
+}
+.yritysnimi{
+    font-weight: bold;
+    color: #067493;
+    padding-bottom: 30px;
+}

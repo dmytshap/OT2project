@@ -1,0 +1,89 @@
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    padding-bottom: 30px;
+}
+header {
+    padding: 30px;
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+}
+.navbar-brand{
+    padding-left: 10px !important;
+}
+
+h2 {
+    font-weight: bold;
+    color: black;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.table{
+    background-color: rgb(233, 233, 233);
+    border-radius: 5px;
+}
+.btn-julkaise {
+    background-color: #067493;
+    border-color: #067493;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    min-width: 100px;
+    
+}
+.btn-julkaise:hover {
+    background-color: #055d75;
+    color: white;
+}
+.btn-varaa {
+    background-color: #067493;
+    border-color: #067493;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    min-width: 100px;
+    
+}
+.btn-varaa:hover {
+    background-color: #055d75;
+    color: white;
+}
+.btn-vie {
+    background-color: #067493;
+    border-color: #067493;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    min-width: 100px;
+    
+}
+.btn-vie:hover {
+    background-color: #055d75;
+    color: white;
+}
+.btn-poista {
+    background-color: #b40909;
+    border-color: #b40909;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    min-width: 100px;
+}
+.btn-poista:hover {
+    background-color: #800505;
+    color: white;
+}
+.bulk-scroll {
+    display: flex;
+    gap: 1rem;      
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+.btn-projektit{
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    border:rgb(0, 0, 0);
+    min-width: 100px;
+    padding: 10px;
+}

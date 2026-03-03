@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Database Connection
  * @dbservername database's hostname
@@ -30,13 +31,11 @@ function connectToDatabase()
 
     /** Make connection to database. */
     $connection = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
-    
+    $connection->set_charset("utf8mb4");
+
     /** If connection to database failed, show error */
     if ($connection->connect_error) {
         die("Ei onnistunut yhdistää tietokantaan..." . $connection->connect_error);
     }
     return $connection;
 }
-
-
-?>

@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `PROJECTS`.`PROJECT_DATA` (
   , `LONG_DESC` LONGTEXT NOT NULL
   , `TAG` VARCHAR(45)
   , `PROJECT_RESERVED` BOOLEAN NOT NULL
+  , `RESERVED_TO` VARCHAR(150)
   , PRIMARY KEY (`PROJECT_ID`)
   );
 
@@ -44,7 +45,8 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   DEADLINE, 
   LONG_DESC,
   TAG,
-  PROJECT_RESERVED
+  PROJECT_RESERVED,
+  RESERVED_TO,
 ) VALUES (
   "Nettisivu"
   ,"Nettisivu koodausideoiden keräämiseksi"
@@ -56,6 +58,7 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   , "Nettisivun tarkoituksena on kerätä ideoita ja helpottaa opettajan työtä. Lorem ipsum dolores magnificum..."
   , "OT2 2027"
   , FALSE
+  , "RYHMÄ LMMOST"
 ), (
   "Toinen Idea"
   ,"Tämä toinen idea on vielä parempi"
@@ -169,4 +172,29 @@ INSERT INTO `PROJECTS`.`INVITES`(
   , "amanuenssinjakkara"
   , ADDTIME(NOW(), '-100:00:00') -- Puts time 100 hours in the past
   , ADDTIME(NOW(), '1:00:00') -- Puts time 1 hour in the past
+);
+-- -----------------------------------------------------
+-- Table PROJECTS.INVITE_LINKS
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS PROJECTS.INVITE_LINKS ;
+
+CREATE TABLE IF NOT EXISTS PROJECTS.INVITE_LINKS (
+  TOKEN VARCHAR(45) NOT NULL
+  , TOKEN_EXPIRY DATETIME NOT NULL
+  , PRIMARY KEY (TOKEN)
+  );
+
+
+-- -----------------------------------------------------
+-- Insert fake data to INVITES_LINKS
+-- -----------------------------------------------------
+INSERT INTO PROJECTS.INVITE_LINKS(
+  TOKEN
+  , TOKEN_EXPIRY
+) VALUES (
+  "testerToken"
+  , ADDTIME(NOW(), '1:00:00')
+), (
+  "k4%fl"
+  , ADDTIME(NOW(), '1:00:00') 
 );

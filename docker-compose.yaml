@@ -1,8 +1,9 @@
 services:
+
   db:
     build:
       context: ./docker
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_mariadb
     container_name: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: "projekti"
@@ -22,7 +23,6 @@ services:
       PMA_PORT: 3306
       PMA_USER: "root"
       PMA_PASSWORD: "projekti"
-
 
   web:
     build:

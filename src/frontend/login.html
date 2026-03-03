@@ -25,36 +25,37 @@ Sivun toiminnallisuus on tiedostossa database_user_session.php.
     <header>
         <p class="projektitori"> <a href="main.php"> Projektitori</p>
         <nav>
-            <a href="../index.html"> Lomake</a>
+            <a href="../index.php"> Lomake</a>
             <a href="otayhteytta.html"> Ota yhteyttä</a>
             <a href="login.html"> Kirjaudu sisään</a>
         </nav>
     </header>
     <div class="main_page">
         <form action="/backend/authentication_logic.php" method="post">
-        <div class="card_container">
+            <div class="card_container">
                 <div class="login_main">
                     <div class="input-group">
-                        <input name="sahkoposti_login"  class="input" type="text" required> 
-                        <label class="user-label">  UEF sähköpostisi </label>
+                        <input name="input-email" class="input" type="text" required>
+                        <label class="user-label"> Sähköpostisi </label>
                     </div>
                     <div class="input-group">
-                        <input name="salasana_login" class="input"  type="password"> 
-                        <label class="user-label" > OTP CODE</label>
+                        <input name="input-OTP" class="input" type="password">
+                        <label class="user-label"> OTP CODE</label>
                     </div>
                 </div>
                 <div class="login_button_div">
                     <button type="submit" name="action" value="login" class="login_button"> Kirjaudu Sisään</button>
                 </div>
                 <div class="generate_otp_div">
-                    <button type="submit" name="action" value="generate" class="generate_otp_button"> Generoi OTP. </button>
+                    <button type="submit" name="action" value="generate" class="generate_otp_button"
+                        formtarget="_blank"> Generoi OTP. </button>
                     <p>Tämä on siis (session) testiä varten. SEKÄ OTP</p>
                 </div>
             </div>
-            </div>
-        </form>
     </div>
-    
+    </form>
+    </div>
+
 </body>
 
 </html>
