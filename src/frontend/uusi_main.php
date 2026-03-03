@@ -30,7 +30,7 @@
                         </li>
                         <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Opettajan nimi
+                            Sähköpostiosoite
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="logout.php">Kirjaudu ulos</a></li>

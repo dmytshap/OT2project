@@ -25,29 +25,29 @@ require 'connect_to_database.php';
  *  */
 function addFormToDatabase()
 {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return null;
-        }
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        return null;
+    }
 
-        $connection = connectToDatabase();
+    $connection = connectToDatabase();
 
-        $yritysnimi = $_POST['yritysnimi'] ?? '';
-        $projektinnimi = $_POST['projektinnimi'] ?? '';
-        $lyhytkuvaus = $_POST['lyhytkuvaus'] ?? '';
-        $pitkakuvaus = $_POST['pitkakuvaus'] ?? '';
-        //$valmistuspaiva =  $_POST['valmistuspaiva'] ?? '';
-        $sahkoposti = $_POST['sahkoposti'] ?? '';
-        $puhelinnumero = $_POST['puhelinnumero'] ?? '';
-        $reserved = false;
+    $yritysnimi = $_POST['yritysnimi'] ?? '';
+    $projektinnimi = $_POST['projektinnimi'] ?? '';
+    $lyhytkuvaus = $_POST['lyhytkuvaus'] ?? '';
+    $pitkakuvaus = $_POST['pitkakuvaus'] ?? '';
+    //$valmistuspaiva =  $_POST['valmistuspaiva'] ?? '';
+    $sahkoposti = $_POST['sahkoposti'] ?? '';
+    $puhelinnumero = $_POST['puhelinnumero'] ?? '';
+    $reserved = false;
 
-        $timestamp = date("Y-m-d H:i:s");
+    $timestamp = date("Y-m-d H:i:s");
 
-        // What fields should be added
-        $stmt = $connection->prepare(
-            "INSERT INTO PROJECT_DATA (short_desc, project_name, phone, email, company, long_desc, CONTACT_TIME, PROJECT_RESERVED) VALUES(?,?,?,?,?,?,?,?)"
-        );
+    // What fields should be added
+    $stmt = $connection->prepare(
+        "INSERT INTO PROJECT_DATA (short_desc, project_name, phone, email, company, long_desc, CONTACT_TIME, PROJECT_RESERVED) VALUES(?,?,?,?,?,?,?,?)"
+    );
 
-        // Fill in database's fields with variables we got previously from user
+    // Fill in database's fields with variables we got previously from user
     $stmt->bind_param(
         "sssssssi",
         $lyhytkuvaus,
@@ -80,5 +80,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: /frontend/success_add_to_database.php");
     exit;
 }
-
-?>

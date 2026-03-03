@@ -2,10 +2,11 @@
 
 require 'connect_to_database.php';
 
-function getProjectFromDatabase($id){
+function getProjectFromDatabase($id)
+{
     $connection = connectToDatabase();
 
-    $stm = $connection -> prepare("SELECT * FROM PROJECT_DATA WHERE PROJECT_ID = ?");
+    $stm = $connection->prepare("SELECT * FROM PROJECT_DATA WHERE PROJECT_ID = ?");
     $stm->bind_param("s", $id);
     $stm->execute();
     $result = $stm->get_result();
@@ -22,7 +23,8 @@ function getProjectFromDatabase($id){
 }
 
 
-function getProjectsFromDatabase(){
+function getProjectsFromDatabase()
+{
 
     $connection = connectToDatabase();
 
