@@ -1,6 +1,8 @@
 <?php
 
 require_once '../backend/connect_to_database.php';
+include '../backend/export.php';
+
 $connection = connectToDatabase();
 $sql = 'SELECT * FROM PROJECT_DATA';
 $result = mysqli_query($connection, $sql);
@@ -119,6 +121,9 @@ $result = mysqli_query($connection, $sql);
                 <button id="btn-varaa" name="varaa_button" class="btn btn-varaa me-4" data-bs-toggle="modal" data-bs-target="#varaaModal">Varaa</button>
                 <button id="btn-vie" class="btn btn-vie me-4">Vie CSV</button>
                 <button id="btn-poista" class="btn btn-poista">Poista</button>
+                <form action="../backend/export.php" method="post">
+                    <button class="btn btn-vie me-4" type="submit"> Export all to CSV </button> <!--- Väliaikaisesti tänne? Ainakin tämä toimii. "Vie CSV" näppäimen logiikanp pitäisi miettiä loppuun (esim. että voi viedä jotkut tietyt projektit, eikä kaikki) -->
+                </form>
             </div>
         </div>
     </div>
@@ -143,6 +148,7 @@ $result = mysqli_query($connection, $sql);
             </div>
         </div>
     </div>
+    <!--sends POST request to backend-->
     <!-- Tekoälyn luoma koodi, toolbar tulee näkyville, kun valitaan 1 tai useampi checkbox -->
     <script>
         const selectAll = document.getElementById('select-all');
