@@ -1,8 +1,8 @@
 <!-- Tämä sivu on testausta varten. 
- 
- Tämä sivu tulee näkyville, jos käyttäjän tiedot tallennettiin tietokantaan onnistuneesti. 
 
- Tulevaisuudessa voisi käyttäjää siirtää toiselle sivulle, jossa olisi sisältöä (esim. "Minun projektit") ? -->
+Tämä sivu tulee näkyville, jos käyttäjän tiedot tallennettiin tietokantaan onnistuneesti. 
+
+Tulevaisuudessa voisi käyttäjää siirtää toiselle sivulle, jossa olisi sisältöä (esim. "Minun projektit") ? -->
 
 <!DOCTYPE html>
 <html lang="en">
