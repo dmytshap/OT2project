@@ -46,7 +46,7 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   LONG_DESC,
   TAG,
   PROJECT_RESERVED,
-  RESERVED_TO,
+  RESERVED_TO
 ) VALUES (
   "Nettisivu"
   ,"Nettisivu koodausideoiden keräämiseksi"
@@ -57,7 +57,7 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   , NULL
   , "Nettisivun tarkoituksena on kerätä ideoita ja helpottaa opettajan työtä. Lorem ipsum dolores magnificum..."
   , "OT2 2027"
-  , FALSE
+  , TRUE
   , "RYHMÄ LMMOST"
 ), (
   "Toinen Idea"
@@ -69,7 +69,8 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   , NULL
   , "Mitähän ihmettä tänne kannattaisi kirjoittaa? Tuleeko hyviä ideoita? Tämän tekstin pitäisi olla tarpeeksi pitkä, jotta sen avulla voidaan testata nettisivun ulkoasua. Pystyykö nettisivu näyttämään pitkän tekstin oikein ja huolehtimaan esimerkiksi rivinvaihdosta?"
   , "gradu"
-  , TRUE
+  , TRUE 
+  , "Group ABC"
 );
 
 -- -----------------------------------------------------
