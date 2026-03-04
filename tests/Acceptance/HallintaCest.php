@@ -21,5 +21,9 @@ final class HallintaCest
 
         //TODO tämä loppuun
         // see ja dontSee testit painalluksien jälkeen
+        // Jos Acceptance.suite.yml -tiedostossa PhpBrowser eikä WebDriver niin dontSeeElement ei toimi
+        //$I -> dontSeeElement('#btn-julkaise'); 
+        $I -> click(['class' => 'form-check-input']);
+        $I -> seeElement('#btn-julkaise');
     }
 }
