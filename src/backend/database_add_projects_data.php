@@ -35,21 +35,22 @@ function addFormToDatabase()
     $projektinnimi = $_POST['projektinnimi'] ?? '';
     $lyhytkuvaus = $_POST['lyhytkuvaus'] ?? '';
     $pitkakuvaus = $_POST['pitkakuvaus'] ?? '';
-    //$valmistuspaiva =  $_POST['valmistuspaiva'] ?? '';
     $sahkoposti = $_POST['sahkoposti'] ?? '';
     $puhelinnumero = $_POST['puhelinnumero'] ?? '';
+    $deadline = $_POST['aikataulu'];
     $reserved = false;
+    
 
     $timestamp = date("Y-m-d H:i:s");
 
     // What fields should be added
     $stmt = $connection->prepare(
-        "INSERT INTO PROJECT_DATA (short_desc, project_name, phone, email, company, long_desc, CONTACT_TIME, PROJECT_RESERVED) VALUES(?,?,?,?,?,?,?,?)"
+        "INSERT INTO PROJECT_DATA (short_desc, project_name, phone, email, company, long_desc, CONTACT_TIME, deadline, PROJECT_RESERVED) VALUES(?,?,?,?,?,?,?,?,?)"
     );
 
     // Fill in database's fields with variables we got previously from user
     $stmt->bind_param(
-        "sssssssi",
+        "ssssssssi",
         $lyhytkuvaus,
         $projektinnimi,
         $puhelinnumero,
@@ -57,6 +58,7 @@ function addFormToDatabase()
         $yritysnimi,
         $pitkakuvaus,
         $timestamp,
+        $deadline,
         $reserved
     );
 
