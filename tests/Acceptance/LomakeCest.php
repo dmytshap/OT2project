@@ -31,8 +31,8 @@ final class LomakeCest
         $I -> click('Lähetä');
 
         //Muut linkit
+        //$I -> click(['class' => 'dropdown-item']);
         $I -> click('Projektitori');
         $I -> click('Hallinta');
-        $I -> click(['class' => 'dropdown-item']);
     }
 }

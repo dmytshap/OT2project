@@ -21,5 +21,8 @@ final class HallintaCest
 
         //TODO tämä loppuun
         // see ja dontSee testit painalluksien jälkeen
+        $I -> dontSeeElement('#btn-julkaise');
+        $I -> click(['class' => 'form-check-input']);
+        $I -> seeElement('#btn-julkaise');
     }
 }

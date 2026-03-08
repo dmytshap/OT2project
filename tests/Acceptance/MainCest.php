@@ -19,12 +19,13 @@ final class MainCest
         // Write your test content here.
 
         $I -> amOnPage('/frontend/uusi_main.php');
+        //$I -> click(['class' => 'dropdown-item']);
 
         $I -> click(['class' => 'btn-otayhteytta']);
 
         //Muut linkit
+        
         $I -> click('Projektitori');
         $I -> click('Hallinta');
-        $I -> click(['class' => 'dropdown-item']);
     }
 }
