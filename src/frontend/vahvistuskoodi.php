@@ -26,7 +26,7 @@
                 <form action="/backend/authentication_logic.php" method="post">  
                     <div class="form-group mb-3">
                         <label for="inputKoodi" class="form-label">Koodi</label>
-                        <input type="text" class="form-control" id="inputKoodi" placeholder="Syötä koodi">
+                        <input type="text" class="form-control" id="inputKoodi" name="input-OTP" placeholder="Syötä koodi">
                     </div>
                     <button type="submit" name="action" value="login" class="btn-laheta px-5 py-2">Vahvista</button>
                 </form>

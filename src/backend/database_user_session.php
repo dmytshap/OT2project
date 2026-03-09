@@ -13,7 +13,7 @@ function generateOTPAddUserToDatabase($length = 6)
 
     //Yhteys tietokantaan + sähköposti
     $connection = connectToDatabase();
-    $email = $_POST['input-email'] ?? '';
+    $email = $_POST['sahkoposti-login'] ?? '';
     $email = strtolower($email);
     $role = "user";
     
@@ -71,7 +71,7 @@ function login_check_user()
 {
     // Yhteys tietokantaan + sähköposti + OTP
     $connection = connectToDatabase();
-    $email = $_POST['input-email'] ?? '';
+    $email = $_SESSION['input-email'] ?? '';
     $otp = $_POST['input-OTP'] ?? '';
 
     // Jos jotain puuttuu, heitä errori

@@ -25,8 +25,8 @@
                 <p class="card-text">Lähetämme kirjautumiskoodin sähköpostiosoitteeseesi.</p>
                 <form action="/backend/authentication_logic.php" method="post">
                     <div class="form-group mb-3">
-                        <label for="inputEmail" class="form-label">Sähköposti</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                        <label for="inputEmail" class="form-label" >Sähköposti</label>
+                        <input type="email" class="form-control" id="inputEmail" name="sahkoposti-login" placeholder="name@example.com">
                     </div>
                     <button type="submit" name="action" value="generate" class="btn-laheta px-5 py-2">Lähetä koodi</button>
                 </form>
