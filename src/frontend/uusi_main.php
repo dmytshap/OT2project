@@ -1,7 +1,15 @@
 <?php
-include '../backend/api-fetcher.php';
+session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: kirjautuminen.php');
+    exit();
+}
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'TEACHER') {
+    $message = 'Ei käyttöoikeutta.';
+    header('Location: no_access.php?msg=' . $message);
+    exit();
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,9 +28,7 @@ include '../backend/api-fetcher.php';
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 fw-semibold sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="uusi_main.php">Projektitori</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -30,12 +36,15 @@ include '../backend/api-fetcher.php';
                     <li class="nav-item">
                         <a class="nav-link" href="uusi_lomake.php">Lomake</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="hallinta.php">Projektien hallinta</a>
-                    </li>
+                    <?php
+                    if($_SESSION['role'] === 'TEACHER'){
+                        echo "<li class='nav-item'>";
+                        echo "<a class='nav-link' href='hallinta.php'>Projektien hallinta</a>";
+                        echo "</li>";
+                    }
+                    ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sähköpostiosoite
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">

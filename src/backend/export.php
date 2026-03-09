@@ -7,10 +7,12 @@ function export()
 {
     $connection = connectToDatabase();
 
-    $sql = 'SELECT * FROM PROJECT_DATA';
-    $result = mysqli_query($connection, $sql);
+    $stm = $connection->prepare('SELECT * FROM PROJECT_DATA');
+    $stm->execute();
 
-    $num_of_projects = mysqli_num_rows($result);
+    $result = $stm->get_result();
+
+    $num_of_projects = $result->num_rows;
 
     $response = array();
     if ($num_of_projects > 0) {
