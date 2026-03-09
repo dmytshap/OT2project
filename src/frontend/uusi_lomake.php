@@ -47,7 +47,7 @@
         <div class="col-lg-8 col-xl-7">
             <h2 class="lomake_teksti mb-4"> Projektilomake </h2>    
             <p class="alateksti mb-4">Lähetä projekti-ideasi projektitorille tällä lomakkeella. </p>
-            <form class="row g-4">
+            <form class="row g-4" action="/backend/database_add_projects_data.php" method="post">
                 <div class="col-md-6">
                     <label for="inputProjektiNimi" class="form-label">Projektin nimi</label>
                     <input type="text" class="form-control" name="projektinnimi" id="inputProjektiNimi" placeholder="Syötä projektin nimi">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="textareaAikataulu" class="form-label">Aikataulu</label>
-                    <textarea class="form-control" id="aikataulu" rows="1" placeholder="Milloin projektin tulee olla valmis?"></textarea>
+                    <textarea class="form-control" name="aikataulu" id="aikataulu" rows="1" placeholder="Milloin projektin tulee olla valmis? Esim. Kesäkuussa"></textarea>
                 </div>
         
                 <div class="col-md-6">
@@ -78,9 +78,8 @@
                     <label for="inputEmail" class="form-label">Sähköposti</label>
                     <input type="email" class="form-control" name="sahkoposti" id="inputEmail" placeholder="name@example.com">
                 </div>
-
                 <div class="col-12 text-end mt-5 mb-5">
-                    <button type="submit" class="btn-laheta px-5 py-2">Lähetä</button>
+                    <button type="submit" class="btn-laheta px-5 py-2" name="lahetaLomake" >Lähetä</button>
                 </div>
             </form>
         </div>     

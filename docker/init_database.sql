@@ -69,8 +69,8 @@ INSERT INTO `PROJECTS`.`PROJECT_DATA`(
   , NULL
   , "Mitähän ihmettä tänne kannattaisi kirjoittaa? Tuleeko hyviä ideoita? Tämän tekstin pitäisi olla tarpeeksi pitkä, jotta sen avulla voidaan testata nettisivun ulkoasua. Pystyykö nettisivu näyttämään pitkän tekstin oikein ja huolehtimaan esimerkiksi rivinvaihdosta?"
   , "gradu"
-  , TRUE
-  , "Team ABCDE"
+  , TRUE 
+  , "Group ABC"
 );
 
 -- -----------------------------------------------------
