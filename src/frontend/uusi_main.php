@@ -56,41 +56,52 @@ include '../backend/api-fetcher.php';
 
             $response = file_get_contents($url);
 
+            //checks if response has data, decodes json into array
+            if($response != FALSE){
             $data = json_decode($response, true);
-            foreach ($data as $row) {
-                $isReserved = $row['PROJECT_RESERVED'] == 1;
-                $reservedText = $isReserved ? 'VARATTU' : 'EI VARATTU';
-                $reservedColor = $isReserved ? '#1aff00' : '#FF0000';
-                echo "<div class='col-md-3 mb-4'>";
-                echo "<a class='card-link' href='project.php?id=$row[PROJECT_ID]'>";
-                echo "<div class='card h-100 shadow'>";
-                echo "<span style='
-                    position: absolute;
-                    top: 10px;
-                    right: 10px;
-                    background-color: $reservedColor;
-                    color: white;
-                    font-size: 0.7rem;
-                    font-weight: 700;
-                    padding: 3px 8px;
-                    border-radius: 4px;
-                    letter-spacing: 0.05em;
-                    z-index: 1;
-                '>$reservedText</span>";
-                echo "<div class='card-body d-flex flex-column'>";
-                echo "<h5 class='card-title'> $row[PROJECT_NAME] </h5>";
-                echo "<h6 class='card-subtitle mb-2 text-muted'> $row[COMPANY] </h6>";
-                echo "<p class='card-text'> $row[SHORT_DESC] </p>";
-                echo "<p class='mb-1'><strong>Deadline:</strong>$row[DEADLINE]</p>";
-                echo "<p class='mb-3'><strong>Julkaistu:</strong> $row[CONTACT_TIME] </p>";
-                echo "<div class='mt-auto d-flex justify-content-center'>";
-                echo "<a class='btn-tiedot px-5 py-2' href='project.php?id=$row[PROJECT_ID]'>Näytä tiedot</a>";
-                echo "</div>";
-                echo "</div>";
-                echo "</div>";
-                echo "</a>";
-                echo "</div>";
-            }
+            }else{
+                $data = null;
+            };
+
+            if($data != null){
+                foreach ($data as $row) {
+                    $isReserved = $row['PROJECT_RESERVED'] == 1;
+                    $reservedText = $isReserved ? 'VARATTU' : 'EI VARATTU';
+                    $reservedColor = $isReserved ? '#FF0000' : '#03c800';
+                    echo "<div class='col-md-3 mb-5'>";
+                    echo "<a class='card-link' href='project.php?id=$row[PROJECT_ID]'>";
+                    echo "<div class='card h-100 shadow'>";
+                    echo "<span style='
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        background-color: $reservedColor;
+                        color: white;
+                        font-size: 0.7rem;
+                        font-weight: 700;
+                        padding: 3px 8px;
+                        border-radius: 4px;
+                        letter-spacing: 0.05em;
+                        z-index: 1;
+                    '>$reservedText</span>";
+                    echo "<div class='card-body d-flex flex-column'>";
+                    echo "<h5 class='card-title'> $row[PROJECT_NAME] </h5>";
+                    echo "<h6 class='card-subtitle mb-2 text-muted'> $row[COMPANY] </h6>";
+                    echo "<p class='card-text'> $row[SHORT_DESC] </p>";
+                    echo "<p class='mb-1'><strong>Deadline:</strong>$row[DEADLINE]</p>";
+                    echo "<p class='mb-3'><strong>Julkaistu:</strong> $row[CONTACT_TIME] </p>";
+                    echo "<div class='mt-auto d-flex justify-content-center'>";
+                    echo "<a class='btn-tiedot px-5 py-2' href='project.php?id=$row[PROJECT_ID]'>Näytä tiedot</a>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</a>";
+                    echo "</div>";
+                }
+            }else{
+            // if no projects were found, display text
+            echo '<h5 class="main_text mb-4">Projekteja ei löytynyt</h5>';
+            };    
             ?>
         </div>
     </div>

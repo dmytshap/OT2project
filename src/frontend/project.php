@@ -51,10 +51,14 @@ include '../backend/api-fetcher.php';
         $url = "http://localhost/backend/database_get_projects_data.php?id=$id";
         //returns json
         $response = file_get_contents($url);
+
+        // have to set a default project name here for breadcrumb, in case project wasn't found
         $projectName = "Projektia ei löytynyt";
+
         //decodes json into array
         if($response != FALSE){
             $data = json_decode($response, true);
+            // set the actual project name, if project was found (for breadcrumb)
             $projectName = $data['PROJECT_NAME'];
             
         }else{
