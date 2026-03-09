@@ -1,0 +1,33 @@
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    padding-bottom: 30px;
+}
+header {
+    padding: 30px;
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+}
+.navbar-brand{
+    padding-left: 10px !important;
+}
+
+.btn-laheta {
+    background-color: #067493;
+    border-color: #067493;
+    color: white;
+    border-radius: 20px;
+    border: none;
+}
+.btn-laheta:hover {
+    background-color: #055d75;
+}
+
+h2 {
+    font-weight: bold;
+    color: black;
+    padding-top: 30px;
+}
+p{
+    padding-bottom: 60px;
+}
