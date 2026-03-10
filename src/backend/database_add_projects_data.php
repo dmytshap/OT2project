@@ -77,6 +77,6 @@ function addFormToDatabase()
 // If server requested POST, run addFormToDatabase()
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     addFormToDatabase();
-    header("Location: /frontend/success_add_to_database.php");
+    header("Location: /onnistui");
     exit;
 }

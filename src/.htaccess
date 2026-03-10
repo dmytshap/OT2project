@@ -1,0 +1,33 @@
+RewriteEngine On
+
+# Block legacy direct file URLs from browser requests.
+RewriteCond %{THE_REQUEST} \s/+frontend/ [NC]
+RewriteRule ^frontend/ - [R=404,L]
+
+# Core pages (new replacements)
+RewriteRule ^$ frontend/uusi_main.php [L,QSA]
+RewriteRule ^etusivu/?$ frontend/uusi_main.php [L,QSA]
+RewriteRule ^lomake/?$ frontend/uusi_lomake.php [L,QSA]
+RewriteRule ^ota-yhteytta/?$ frontend/otayhteytta.html [L,QSA]
+RewriteRule ^kirjaudu/?$ frontend/kirjautuminen.php [L,QSA]
+RewriteRule ^vahvistuskoodi/?$ frontend/vahvistuskoodi.php [L,QSA]
+RewriteRule ^uloskirjaus/?$ frontend/logout.php [L,QSA]
+RewriteRule ^omat-projektit/?$ frontend/my_projects.php [L,QSA]
+RewriteRule ^projektit/?$ frontend/projects_table.php [L,QSA]
+RewriteRule ^virhe/?$ frontend/virhe.html [L,QSA]
+RewriteRule ^onnistui/?$ frontend/success_add_to_database.php [L,QSA]
+RewriteRule ^kirjautuminen-onnistui/?$ frontend/succesfully_loged_in.php [L,QSA]
+
+# Admin pages
+RewriteRule ^hallinta/?$ frontend/hallinta.php [L,QSA]
+RewriteRule ^admin/?$ frontend/admin_panel.php [L,QSA]
+
+# Dynamic routes
+RewriteRule ^projekti/([0-9]+)/?$ frontend/project.php?id=$1 [L,QSA]
+RewriteRule ^kutsu/([A-Za-z0-9]+)/?$ frontend/uusi_lomake.php?token=$1 [L,QSA]
+
+# Allow direct access to existing files and directories (css, js, images, vendor, etc.).
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+

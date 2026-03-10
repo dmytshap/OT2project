@@ -9,7 +9,7 @@ require  '../backend/database_add_projects_data.php';
 
 // Jos logged_in ei ole totta = siirrää login sivulle
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: /login.html");
+    header("Location: /kirjaudu");
     exit;
 }
 
@@ -41,12 +41,12 @@ Tämä sivu tulee näkyville, jos käyttäjä on sisäänkirjautunut ja omistaa 
 <body>
     <link rel="stylesheet" href="../styles/styles_main.css">
     <header>
-    <p class="projektitori"><a href="main.php">Projektitori</a></p>
+    <p class="projektitori"><a href="/etusivu">Projektitori</a></p>
     <nav>
-        <a href="../index.html">Lomake</a>
-        <a href="otayhteytta.html">Ota yhteyttä</a>            
-        <a href="my_projects.php">My Projects</a>
-        <a href="logout.php">Kirjaudu ulos</a>
+        <a href="/lomake">Lomake</a>
+        <a href="/ota-yhteytta">Ota yhteyttä</a>            
+        <a href="/omat-projektit">My Projects</a>
+        <a href="/uloskirjaus">Kirjaudu ulos</a>
     </nav>
 </header>
 

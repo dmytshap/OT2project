@@ -1,3 +1,20 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$authMailStatus = $_SESSION['auth_mail_status'] ?? null;
+$authDebugOtp = $_SESSION['auth_debug_otp'] ?? null;
+unset($_SESSION['auth_mail_status'], $_SESSION['auth_debug_otp']);
+?>
+
+<!-- Debug-viestit OTP-lahetyksen testaamiseen. Poista rivi 1-10 ennen tuotantoa. -->
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +29,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 fw-semibold sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="uusi_main.php">Projektitori</a>
+            <a class="navbar-brand" href="/etusivu">Projektitori</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -23,10 +40,41 @@
             <div class="card-body">
                 <h3 class="card-title">Vahvistuskoodi</h3>
                 <p class="card-text">Syötä koodi, jonka lähetimme sähköpostiosoitteeseesi.</p>
-                <form action="/backend/authentication_logic.php" method="post">  
+
+                <!-- ALKAA  Debug-viestit OTP-lahetyksen testaamiseen. Poista ennen tuotantoa. -->
+
+                <?php if ($authMailStatus): ?>
+                    <div class="alert alert-secondary" role="alert">
+                        <?= htmlspecialchars($authMailStatus) ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($authDebugOtp): ?>
+                    <div class="alert alert-warning" role="alert">
+                        OTP (debug): <strong><?= htmlspecialchars($authDebugOtp) ?></strong>
+                    </div>
+                <?php endif; ?>
+
+                <form action="/backend/authentication_logic.php" method="post">
+                    <div class="form-group mb-3">
+                        <label for="inputEmail" class="form-label">Sähköposti</label>
+                        <input type="email" class="form-control" id="inputEmail" name="input-email" placeholder="name@example.com" value="<?= htmlspecialchars($_GET['email'] ?? '') ?>" required>
+                    </div>
+
+                <!-- LOPPUU  Debug-viestit OTP-lahetyksen testaamiseen. Poista ennen tuotantoa. -->
+
+
+
+
+
+
+
+
+                    
+
                     <div class="form-group mb-3">
                         <label for="inputKoodi" class="form-label">Koodi</label>
-                        <input type="text" class="form-control" id="inputKoodi" placeholder="Syötä koodi">
+                        <input type="text" class="form-control" id="inputKoodi" name="input-OTP" placeholder="Syötä koodi" required>
                     </div>
                     <button type="submit" name="action" value="login" class="btn-laheta px-5 py-2">Vahvista</button>
                 </form>

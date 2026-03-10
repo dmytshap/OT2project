@@ -43,7 +43,7 @@ function generateOTPAddUserToDatabase($length = 6)
         $role = "TEACHER";
     } elseif (str_ends_with($email, 'uef.fi') && !$stmt_check_teacher->num_rows > 0) {
         $_SESSION['error'] = 'Jos olet opiskelija, käytä @student.uef.fi sähköpostia.';
-        header("Location: /frontend/login.html");
+        header("Location: /kirjaudu");
         exit; // Tämä estää että OTP luodaan
     } elseif (str_ends_with($email, '@student.uef.fi')) { //Opiskelija
         $role = "STUDENT";
@@ -104,10 +104,10 @@ function login_check_user()
         $_SESSION['logged_in'] = true;
 
         // Onnistunut -> siirrä onnistumissivulle
-        header("Location: /frontend/succesfully_loged_in.php");
+        header("Location: /kirjautuminen-onnistui");
         exit;
     } else {
-        header("Location: ../frontend/virhe.html");
+        header("Location: /virhe");
     }
     exit;
 }

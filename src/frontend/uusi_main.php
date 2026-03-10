@@ -16,24 +16,24 @@
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 fw-semibold sticky-top">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="uusi_main.php">Projektitori</a>
+                    <a class="navbar-brand" href="/etusivu">Projektitori</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-normal">
                         <li class="nav-item">
-                        <a class="nav-link" href="uusi_lomake.php">Lomake</a>
+                        <a class="nav-link" href="/lomake">Lomake</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="hallinta.php">Projektien hallinta</a>
+                        <a class="nav-link" href="/hallinta">Projektien hallinta</a>
                         </li>
                         <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sähköpostiosoite
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="logout.php">Kirjaudu ulos</a></li>
+                            <li><a class="dropdown-item" href="/uloskirjaus">Kirjaudu ulos</a></li>
                             
                         </ul>
                         </li>
@@ -50,10 +50,10 @@
 
                 $response = file_get_contents($url);
 
-                $data = json_decode($response, true);
+                $data = json_decode($response, true) ?: [];
                 foreach ($data as $row) {
                     echo "<div class='col-md-3 mb-4'>";
-                    echo "<a class='card-link' href='project.php?id=$row[PROJECT_ID]'>";
+                    echo "<a class='card-link' href='/projekti/$row[PROJECT_ID]'>";
                     echo "<div class='card h-100 shadow'>";
                     echo "<div class='card-body d-flex flex-column'>";
                     echo "<h5 class='card-title'> $row[PROJECT_NAME] </h5>";
@@ -62,7 +62,7 @@
                     echo "<p class='mb-1'><strong>Aikaväli:</strong> 01.01.2026 - 31.12.2026</p>";
                     echo "<p class='mb-3'><strong>Julkaistu:</strong> $row[CONTACT_TIME] </p>";
                     echo "<div class='mt-auto d-flex justify-content-center'>";
-                    echo "<a class='btn-tiedot px-5 py-2' href='project.php?id=$row[PROJECT_ID]'>Näytä tiedot</a>";
+                    echo "<a class='btn-tiedot px-5 py-2' href='/projekti/$row[PROJECT_ID]'>Näytä tiedot</a>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";

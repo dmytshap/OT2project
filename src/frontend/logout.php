@@ -19,6 +19,6 @@ if (ini_get("session.use_cookies")) {
 }
 
 // Redirect to login page
-header("Location: /frontend/kirjautuminen.php");
+header("Location: /kirjaudu");
 exit;
 ?>
