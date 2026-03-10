@@ -1,21 +1,14 @@
 <?php
 // This file is only for reference to see how sending email works.
 
-
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-use Dotenv\Dotenv;
 
-//Load Composer's autoloader to enable phpdotenv in dev environments.
-$autoloadPath = __DIR__ . '/../vendor/autoload.php';
-if (file_exists($autoloadPath)) {
-    require $autoloadPath;
-    $dotenv = Dotenv::createImmutable(__DIR__ , '/../.env');
-    $dotenv->safeLoad();
-}
+require_once 'env.php';
+require __DIR__.'/../vendor/autoload.php';
 
 // Tarkistetaan onko lomake lähetetty
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_email'])) {

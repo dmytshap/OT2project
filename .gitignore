@@ -1,3 +1,4 @@
 samu/
 .env
 vendor/
+env.php
