@@ -2,6 +2,7 @@
     "require-dev": {
         "codeception/codeception": "^5.3",
         "codeception/module-phpbrowser": "*",
-        "codeception/module-asserts": "*"
+        "codeception/module-asserts": "*",
+        "codeception/module-webdriver": "*"
     }
 }
