@@ -47,6 +47,7 @@
             <div class="row">
                 <?php
                 $url = 'http://localhost/backend/database_get_projects_data.php';
+                //$url = 'https://cs.uef.fi/projektitori/frontend/uusi_main.php';
 
                 $response = file_get_contents($url);
 

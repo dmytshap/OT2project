@@ -79,7 +79,7 @@ if (isset($_POST['delete_invite_links']) && isset($_POST['selected_tokens'])) {
             </div>
         <?php endif; ?>
         <h4 class="valiotsikko">Opettajien hallinta</h4>
-        <form action="/backend/admin_features.php" method="post" class="row g-4">
+        <form action="../backend/admin_features.php" method="post" class="row g-4">
             <div class="col-md-6">
                 <label for="teacherEmail" class="form-label">Opettajan sähköposti (vain @uef.fi)</label>
                 <input type="text" class="form-control" name="teacher_email" id="teacherEmail" placeholder="Syötä opettajan sähköposti">
@@ -89,7 +89,7 @@ if (isset($_POST['delete_invite_links']) && isset($_POST['selected_tokens'])) {
             </div>
         </form>
 
-        <form action="/backend/admin_features.php" method="post"> <!-- vois lisätä class="row g-4" tänne jos halua -->
+        <form action="../backend/admin_features.php" method="post"> <!-- vois lisätä class="row g-4" tänne jos halua -->
             <h4 class="valiotsikko">Kutsulinkit</h4>
 
             <div class="button-div d-flex align-items-center justify-content-between w-100 mb-2">
@@ -97,7 +97,7 @@ if (isset($_POST['delete_invite_links']) && isset($_POST['selected_tokens'])) {
                 <button class="btn-kutsulinkki px-5 py-2" id="luoKutsulinkki" name="luo_kutsulinkki" type="submit" onClick="alertUser()" value="Show alert Box">Luo uusi kutsulinkki</button>
             </div>
         </form>
-        <form action="/backend/admin_features.php" method="post">
+        <form action="../backend/admin_features.php" method="post">
             <div class="table-responsive">
                 <table class="table table-hover shadow">
                     <thead>

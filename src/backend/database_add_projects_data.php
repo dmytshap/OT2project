@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require 'connect_to_database.php';
+require_once 'connect_to_database.php';
 //Database Configuration 
 // This file will contain database connection details.
 // Also database manipulation functions etc.
@@ -77,6 +77,6 @@ function addFormToDatabase()
 // If server requested POST, run addFormToDatabase()
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     addFormToDatabase();
-    header("Location: /frontend/success_add_to_database.php");
+    header("Location: ../frontend/success_add_to_database.php");
     exit;
 }

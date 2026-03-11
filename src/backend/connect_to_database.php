@@ -8,14 +8,8 @@
  * @dbname name of the database [table]
  */
 
-use Dotenv\Dotenv;
-
-$autoloadPath = __DIR__ . '/../vendor/autoload.php';
-if (file_exists($autoloadPath)) {
-    require $autoloadPath;
-    $dotenv = Dotenv::createImmutable(__DIR__ , '/../.env');
-    $dotenv->safeLoad();
-}
+require_once __DIR__ . '/../env.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 function connectToDatabase()
 {

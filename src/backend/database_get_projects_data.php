@@ -1,6 +1,6 @@
 <?php
 
-require 'connect_to_database.php';
+require_once 'connect_to_database.php';
 
 function getProjectFromDatabase($id)
 {

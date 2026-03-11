@@ -7,8 +7,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require_once 'env.php';
-require __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../env.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 // Tarkistetaan onko lomake lähetetty
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_email'])) {

@@ -23,7 +23,7 @@
             <div class="card-body">
                 <h3 class="card-title">Kirjaudu sisään</h3>
                 <p class="card-text">Lähetämme kirjautumiskoodin sähköpostiosoitteeseesi.</p>
-                <form action="/backend/authentication_logic.php" method="post">
+                <form action="../backend/authentication_logic.php" method="post">
                     <div class="form-group mb-3">
                         <label for="inputEmail" class="form-label">Sähköposti</label>
                         <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">

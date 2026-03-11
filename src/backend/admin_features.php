@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require 'connect_to_database.php';
+require_once 'connect_to_database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             deleteTeacher($email);
         }
 
-        header("Location: /frontend/admin_panel.php");
+        header("Location: ../frontend/admin_panel.php");
         exit();
     }
     if (isset($_POST['delete_invite_links'])) {
@@ -38,11 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $invite_link = generateInviteLink();
         // tätä tarvitaan että tulisi ilmoitus alertUser() admin_panel.php:ssä.
         $_SESSION['invite_link'] = $invite_link;
-        header("Location: /frontend/admin_panel.php");
+        header("Location: ../frontend/admin_panel.php");
         exit();
     }
 
-    header("Location: /frontend/admin_panel.php");
+    header("Location: ../frontend/admin_panel.php");
 } // if post
 
 

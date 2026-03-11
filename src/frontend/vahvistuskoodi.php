@@ -23,7 +23,7 @@
             <div class="card-body">
                 <h3 class="card-title">Vahvistuskoodi</h3>
                 <p class="card-text">Syötä koodi, jonka lähetimme sähköpostiosoitteeseesi.</p>
-                <form action="/backend/authentication_logic.php" method="post">  
+                <form action="../backend/authentication_logic.php" method="post">  
                     <div class="form-group mb-3">
                         <label for="inputKoodi" class="form-label">Koodi</label>
                         <input type="text" class="form-control" id="inputKoodi" placeholder="Syötä koodi">

@@ -1,6 +1,6 @@
 <?php
 // Tietokannan yhdistämistä varten
-require  '../backend/database_add_projects_data.php';
+require_once '../backend/database_add_projects_data.php';
 
     // jos sessiota ei ole = aloita sellaisen (tämä on bypass, koska tietääkseni session_start on pakko olla jokaisella sivulla missä käyttäjän tiedot tarvitaan?)
     if (session_status() == PHP_SESSION_NONE) {
@@ -9,7 +9,7 @@ require  '../backend/database_add_projects_data.php';
 
 // Jos logged_in ei ole totta = siirrää login sivulle
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: /login.html");
+    header("Location: login.html");
     exit;
 }
 

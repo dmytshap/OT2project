@@ -15,7 +15,7 @@ cd "$SCRIPT_DIR"
 echo "Running in directory: $SCRIPT_DIR"
 
 # Files/folders to keep
-EXCEPTIONS=("cleanup.sh" ".env" "perusoikeudet.sh")
+EXCEPTIONS=("cleanup.sh" "env.php.bak" "perusoikeudet.sh")
 
 # Function to check if item is in exception list
 is_exception() {
