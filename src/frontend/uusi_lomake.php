@@ -1,5 +1,32 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: kirjautuminen.php');
+    exit();
+}
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'TEACHER') {
+    if ($_SESSION['role'] === 'COMPANY' && isset($_GET['id'])) {
+        include '../backend/helper_functions.php';
+        $id = $_GET['id'];
+        $res = fetchAndCheckIfValid($id);
+        if (!$res) {
+            $message = "Kutsulinkki ei ole enää voimassa tai väärä";
+            header('Location: no_access.php?msg=' . $message);
+            exit();
+        }
+    }else{
+        $message = "Ei käyttöoikeutta.";
+        header('Location: no_access.php?msg=' . $message);
+        exit();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +35,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/uusi_styles_lomake.css">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 fw-semibold sticky-top">
                 <div class="container-fluid">
@@ -45,7 +73,7 @@
             </ol>
         </nav>
         <div class="col-lg-8 col-xl-7">
-            <h2 class="lomake_teksti mb-4"> Projektilomake </h2>    
+            <h2 class="lomake_teksti mb-4"> Projektilomake </h2>
             <p class="alateksti mb-4">Lähetä projekti-ideasi projektitorille tällä lomakkeella. </p>
             <form class="row g-4" action="/backend/database_add_projects_data.php" method="post">
                 <div class="col-md-6">
@@ -68,7 +96,7 @@
                     <label for="textareaAikataulu" class="form-label">Aikataulu</label>
                     <textarea class="form-control" name="aikataulu" id="aikataulu" rows="1" placeholder="Milloin projektin tulee olla valmis? Esim. Kesäkuussa"></textarea>
                 </div>
-        
+
                 <div class="col-md-6">
                     <label for="inputPuh" class="form-label">Puhelinnumero</label>
                     <input type="tel" class="form-control" name="puhelinnumero" id="inputPuh" placeholder="Syötä puhelinnumero">
@@ -82,11 +110,12 @@
                     <button type="submit" class="btn-laheta px-5 py-2" name="lahetaLomake" >Lähetä</button>
                 </div>
             </form>
-        </div>     
+        </div>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    
+
 </body>
+
 </html>

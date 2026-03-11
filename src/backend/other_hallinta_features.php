@@ -1,18 +1,50 @@
 <?php
-
 require_once 'connect_to_database.php';
 
-
-function export()
+// poistaa valitut projektit
+function deleteProject(array $chosen_projects)
 {
+    if (empty($chosen_projects)) {
+        return false;
+    }
+    #Prepared Statement varten, laskee montako projektia on valittu ja laittaa ne $stmt:iin.
+    $placeholders = implode(',', array_fill(0, count($chosen_projects), '?'));
+
     $connection = connectToDatabase();
+    $stmt = $connection->prepare("DELETE FROM PROJECT_DATA WHERE PROJECT_ID IN ($placeholders)");
 
-    $stm = $connection->prepare('SELECT * FROM PROJECT_DATA');
-    $stm->execute();
+    #integerejen määrä #stmt varten.
+    $integer_amount = str_repeat("i", count($chosen_projects));
+    $stmt->bind_param($integer_amount, ...$chosen_projects);
 
-    $result = $stm->get_result();
+    $stmt->execute();
+    $deleted = $stmt->affected_rows;
+    $stmt->close();
+    $connection->close();
 
-    $num_of_projects = $result->num_rows;
+    return $deleted;
+}
+
+// vie valitut projektit csv-muotoon
+function export(array $chosen_projects)
+{
+    if (empty($chosen_projects)) {
+        return false;
+    }
+    #Prepared Statement varten, laskee montako projektia on valittu ja laittaa ne $stmt:iin.
+    $placeholders = implode(',', array_fill(0, count($chosen_projects), '?'));
+
+    $connection = connectToDatabase();
+    $stmt = $connection->prepare("SELECT * FROM PROJECT_DATA WHERE PROJECT_ID IN ($placeholders)");
+
+    #integerejen määrä #stmt varten.
+    $integer_amount = str_repeat("i", count($chosen_projects));
+    $stmt->bind_param($integer_amount, ...$chosen_projects);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $num_of_projects = mysqli_num_rows($result);
 
     $response = array();
     if ($num_of_projects > 0) {
@@ -79,9 +111,5 @@ function export()
     } else {
         echo 'Ei projekteja';
     }
+    exit();
 }
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    export();
-    exit;
-};

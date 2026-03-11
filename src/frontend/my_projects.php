@@ -3,11 +3,9 @@
 require  '../backend/database_add_projects_data.php';
 
     // jos sessiota ei ole = aloita sellaisen (tämä on bypass, koska tietääkseni session_start on pakko olla jokaisella sivulla missä käyttäjän tiedot tarvitaan?)
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-
-// Jos logged_in ei ole totta = siirrää login sivulle
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: /kirjaudu");
     exit;

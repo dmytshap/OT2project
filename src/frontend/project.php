@@ -1,4 +1,16 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: kirjautuminen.php');
+    exit();
+}
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'TEACHER') {
+    $message = 'Ei käyttöoikeutta.';
+    header('Location: no_access.php?msg=' . $message);
+    exit();
+}
 include '../backend/api-fetcher.php';
 ?>
 
@@ -51,10 +63,14 @@ include '../backend/api-fetcher.php';
         $url = "http://localhost/backend/database_get_projects_data.php?id=$id";
         //returns json
         $response = file_get_contents($url);
+
+        // have to set a default project name here for breadcrumb, in case project wasn't found
         $projectName = "Projektia ei löytynyt";
+
         //decodes json into array
         if($response != FALSE){
             $data = json_decode($response, true);
+            // set the actual project name, if project was found (for breadcrumb)
             $projectName = $data['PROJECT_NAME'];
             
         }else{

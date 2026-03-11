@@ -27,8 +27,9 @@ $action = $_POST['action'] ?? '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Jos action on Generate, kutsu generateOTPAddUserToDatabase()
     if ($action == 'generate') {
+        $email = $_POST['sahkoposti-login'] ?? '';
         $otp = generateOTPAddUserToDatabase();
-        $email = $_POST['input-email'] ?? '';
+        $_SESSION['input-email'] = $email;
         $mailStatusMessage = 'Sähköpostia ei voitu lähettää, mutta OTP-koodi luotiin.';
 
         if ($otp && $email) {
@@ -58,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mailStatusMessage = "OTP-koodia ei voitu lahettaa. Mailer Error: {$mail->ErrorInfo}";
             }
         }
+        header('Location: /frontend/vahvistuskoodi.php');
         
         $_SESSION['auth_mail_status'] = $mailStatusMessage;
         $_SESSION['auth_debug_otp'] = $otp;

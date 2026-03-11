@@ -1,12 +1,36 @@
 <?php
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: kirjautuminen.php');
+    exit();
+}
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'TEACHER') {
+    $message = 'Ei käyttöoikeutta.';
+    header('Location: no_access.php?msg=' . $message);
+    exit();
+}
 require_once '../backend/connect_to_database.php';
-include '../backend/export.php';
+include '../backend/other_hallinta_features.php';
 
 $connection = connectToDatabase();
 $sql = 'SELECT * FROM PROJECT_DATA';
 $result = mysqli_query($connection, $sql);
 
+if(isset($_POST['export_project']) && isset($_POST['selected_projects'])) {
+    export($_POST['selected_projects']);
+}
+
+if (isset($_POST['delete_project']) && isset($_POST['selected_projects'])) {
+    $deleted = deleteProject($_POST['selected_projects']);
+
+    $_SESSION['message'] = "$deleted projekti(a) poistettu";
+    $_SESSION['message_type'] = "success";
+
+    header("Location: ../frontend/hallinta.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -57,75 +81,89 @@ $result = mysqli_query($connection, $sql);
             </ol>
         </nav>
         <h2 class="main_text mb-4">Projektien hallinta</h2>
-        <div class="table-responsive">
-            <div class="dropdown mb-3">
-                <button class="btn-projektit dropdown-toggle bg-light shadow border rounded" type="button" data-bs-toggle="dropdown">
-                    <?= ($_GET['filter'] ?? 'all') === 'own' ? 'Omat projektit' : 'Kaikki projektit' ?>
-                </button>
-
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="?filter=all">Kaikki projektit</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="?filter=own">Omat projektit</a>
-                    </li>
-                </ul>
+        <!---Notification--->
+        <?php if (isset($_SESSION['message'])): ?>
+            <div class="alert alert-<?php echo $_SESSION['message_type']; ?>">
+                <?php
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                unset($_SESSION['message_type']);
+                ?>
             </div>
-            <table class="table table-hover shadow">
-                <thead>
-                    <tr>
-                        <th scope="col"><input class='form-check-input' type="checkbox" id="select-all" /></th>
-                        <th scope="col">ID</th>
-                        <th scope="col">Projektin nimi</th>
-                        <th scope="col">Yritys</th>
-                        <th scope="col">Puhelin</th>
-                        <th scope="col">Sähköposti</th>
-                        <th scope="col">Deadline</th>
-                        <th scope="col">Lyhyt kuvaus</th>
-                        <th scope="col">Varattu</th>
-                        <th scope="col">Kenelle varattu?</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    <?php
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $reserved = $row['PROJECT_RESERVED'] == 1;
-                        $reservedTo = htmlspecialchars($row['RESERVED_TO'] ?? '');
-                        $id = $row['PROJECT_ID'];
+        <?php endif; ?>
+        <form action="/frontend/hallinta.php" method="post">
+            <div class="table-responsive">
+                <div class="dropdown mb-3">
+                    <button class="btn-projektit dropdown-toggle bg-light shadow border rounded" type="button" data-bs-toggle="dropdown">
+                        <?= ($_GET['filter'] ?? 'all') === 'own' ? 'Omat projektit' : 'Kaikki projektit' ?>
+                    </button>
 
-                        $reservedCell = $reserved ? "$reservedTo <button class='btn btn-sm btn-danger ms-2 btn-unreserve' data-id='$id'>x</button>" : "Ei varattu";
-                        echo "<tr data-id='$id' data-reserved='{$row['PROJECT_RESERVED']}'>
-                                    <td><input class='form-check-input row-checkbox' type='checkbox' value='$id' /></td>
-                            <th scope='row'> $row[PROJECT_ID] </th>
-                            <td>$row[PROJECT_NAME]</td>
-                            <td>$row[COMPANY]</td>
-                            <td>$row[PHONE]</td>
-                            <td>$row[EMAIL]</td>
-                            <td>$row[DEADLINE]</td>
-                            <td>$row[SHORT_DESC]</td>
-                            <td>$row[PROJECT_RESERVED]</td>
-                            <td>$reservedCell</td>
-                        </tr> ";
-                    }
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="?filter=all">Kaikki projektit</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="?filter=own">Omat projektit</a>
+                        </li>
+                    </ul>
+                </div>
+                <table class="table table-hover shadow">
+                    <thead>
+                        <tr>
+                            <th scope="col"><input class='form-check-input' type="checkbox" id="select-all" /></th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Projektin nimi</th>
+                            <th scope="col">Yritys</th>
+                            <th scope="col">Puhelin</th>
+                            <th scope="col">Sähköposti</th>
+                            <th scope="col">Deadline</th>
+                            <th scope="col">Lyhyt kuvaus</th>
+                            <th scope="col">Varattu</th>
+                            <th scope="col">Kenelle varattu?</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $reserved = $row['PROJECT_RESERVED'] == 1;
+                            $reservedTo = htmlspecialchars($row['RESERVED_TO'] ?? '');
+                            $id = $row['PROJECT_ID'];
 
-                    ?>
-                </tbody>
-            </table>
-        </div>
-        <!-- Tekoälyn avulla luotu toolbar taulukolle -->
-        <div id="bulk-actions" class="d-none d-flex shadow justify-content-between align-items-center p-3 bg-light border rounded mt-2">
-            <span id="selected-count">1 valittu</span>
-            <div class="bulk-scroll">
-                <button id="btn-julkaise" class="btn btn-julkaise me-4">Julkaise</button>
-                <button id="btn-varaa" name="varaa_button" class="btn btn-varaa me-4" data-bs-toggle="modal" data-bs-target="#varaaModal">Varaa</button>
-                <button id="btn-vie" class="btn btn-vie me-4">Vie CSV</button>
-                <button id="btn-poista" class="btn btn-poista">Poista</button>
-                <form action="../backend/export.php" method="post">
-                    <button class="btn btn-vie me-4" type="submit"> Export all to CSV </button> <!--- Väliaikaisesti tänne? Ainakin tämä toimii. "Vie CSV" näppäimen logiikanp pitäisi miettiä loppuun (esim. että voi viedä jotkut tietyt projektit, eikä kaikki) -->
-                </form>
+                            $reservedCell = $reserved ? "$reservedTo <button class='btn btn-sm btn-danger ms-2 btn-unreserve' data-id='$id'>x</button>" : "Ei varattu";
+                            echo "<tr data-id='$id' data-reserved='{$row['PROJECT_RESERVED']}'>
+                                        <td><input class='form-check-input row-checkbox' type='checkbox' name='selected_projects[]' value='$id' /></td>
+                                <th scope='row'> $row[PROJECT_ID] </th>
+                                <td>$row[PROJECT_NAME]</td>
+                                <td>$row[COMPANY]</td>
+                                <td>$row[PHONE]</td>
+                                <td>$row[EMAIL]</td>
+                                <td>$row[DEADLINE]</td>
+                                <td>$row[SHORT_DESC]</td>
+                                <td>$row[PROJECT_RESERVED]</td>
+                                <td>$reservedCell</td>
+                            </tr> ";
+                        }
+
+                        ?>
+                    </tbody>
+                </table>
             </div>
-        </div>
+            <!-- Tekoälyn avulla luotu toolbar taulukolle -->
+            <div id="bulk-actions" class="toolbar-hallinta d-none d-flex shadow justify-content-between align-items-center p-3 bg-light border rounded mt-2">
+                <span id="selected-count">1 valittu</span>
+                <div class="bulk-scroll">
+                    <button id="btn-julkaise" class="btn btn-julkaise me-4" type="submit" name="publish_project" >Julkaise</button>
+                    <button id="btn-varaa" name="varaa_button" class="btn btn-varaa me-4" type="button" data-bs-toggle="modal" data-bs-target="#varaaModal">Varaa</button>
+                    <button id="btn-vie" class="btn btn-vie me-4" type="submit" name="export_project" >Vie CSV</button>
+                    <button id="btn-poista" class="btn btn-poista" type="submit" name="delete_project" >Poista</button>
+                    <!--
+                    <form action="../backend/export.php" method="post">
+                        <button class="btn btn-vie me-4" type="submit"> Export all to CSV </button> Väliaikaisesti tänne? Ainakin tämä toimii. "Vie CSV" näppäimen logiikanp pitäisi miettiä loppuun (esim. että voi viedä jotkut tietyt projektit, eikä kaikki)
+                    </form>
+                    -->
+                </div>
+            </div>
+        </form>    
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 

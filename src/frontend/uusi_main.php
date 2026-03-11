@@ -1,7 +1,15 @@
 <?php
-include '../backend/api-fetcher.php';
+session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: kirjautuminen.php');
+    exit();
+}
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'TEACHER') {
+    $message = 'Ei käyttöoikeutta.';
+    header('Location: no_access.php?msg=' . $message);
+    exit();
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

@@ -2,6 +2,15 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: kirjautuminen.php');
+    exit();
+}
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'TEACHER') {
+    $message = 'Ei käyttöoikeutta.';
+    header('Location: no_access.php?msg=' . $message);
+    exit();
+}
 
 require_once '../backend/connect_to_database.php';
 $connection = connectToDatabase();
@@ -139,7 +148,7 @@ if (isset($_POST['delete_invite_links']) && isset($_POST['selected_tokens'])) {
     <!-- LLM:n tuottama, katsoin tutorialit netissä niin siellä tehtiin samalla tavalla -->
     <script>
         document.getElementById('btn-kopioi').addEventListener('click', function(e) {
-            e.preventDefault(); 
+            e.preventDefault();
             const checked = document.querySelectorAll('.row-checkbox:checked');
 
             const links = Array.from(checked).map(cb => {

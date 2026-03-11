@@ -87,3 +87,10 @@ h2 {
     min-width: 100px;
     padding: 10px;
 }
+.toolbar-hallinta{
+    position: sticky;
+    bottom: 20px;
+    z-index: 100;
+    max-width: 1200px;
+    margin: 0 auto;
+}
