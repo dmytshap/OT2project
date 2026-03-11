@@ -14,19 +14,19 @@ include '../backend/api-fetcher.php';
 
 <body>
     <header>
-        <p class="projektitori"> <a href="main.php"> Projektitori</p>
+        <p class="projektitori"> <a href="/etusivu"> Projektitori</p>
         <nav>
-            <a href="../index.php"> Lomake</a>
-            <a href="otayhteytta.html"> Ota yhteyttä</a>
-            <a href="my_projects.php">My Projects</a>
-            <a href="login.html"> Kirjaudu sisään</a>
+            <a href="/lomake"> Lomake</a>
+            <a href="/ota-yhteytta"> Ota yhteyttä</a>
+            <a href="/omat-projektit">My Projects</a>
+            <a href="/kirjaudu"> Kirjaudu sisään</a>
         </nav>
     </header>
 
     <div class="main_page">
         <div class="main_text_div">
             <p class="main_text"> Täällä näet kaikki tarjolla olevat projektit. </p>
-            <a class="main_text" href="projects_table.php" target="_blank"> Näytä kaikki projektit taulukossa (avautuu uudessa välilehdessä)</a>
+            <a class="main_text" href="/projektit" target="_blank"> Näytä kaikki projektit taulukossa (avautuu uudessa välilehdessä)</a>
         </div>
         <div class="grid-projects">
             <?php
@@ -54,7 +54,7 @@ include '../backend/api-fetcher.php';
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";
-                echo "<a style='color: blue;' href='project.php?id=$row[PROJECT_ID]'>Katso projektin kaikki tiedot</a>";
+                echo "<a style='color: blue;' href='/projekti/$row[PROJECT_ID]'>Katso projektin kaikki tiedot</a>";
                 echo "</div>";
             }
             ?>

@@ -4,6 +4,11 @@ FROM php:8.2-apache
 # Install required mysqli extension for php
 RUN docker-php-ext-install mysqli
 
+# Enable rewrite rules and allow .htaccess overrides for clean URLs.
+RUN a2enmod rewrite
+RUN printf "<Directory /var/www/html>\n    AllowOverride All\n    Require all granted\n</Directory>\n" > /etc/apache2/conf-available/ot2-rewrite.conf \
+    && a2enconf ot2-rewrite
+
 # Install required packages for Composer
 RUN apt-get update && apt-get install -y \
     unzip \

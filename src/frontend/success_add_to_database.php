@@ -15,12 +15,12 @@ Tulevaisuudessa voisi käyttäjää siirtää toiselle sivulle, jossa olisi sis�
 
 <body>
     <header>
-        <p class="projektitori"> <a href="main.php">  Projektitori</p>
+        <p class="projektitori"> <a href="/etusivu">  Projektitori</p>
         <nav>
-            <a href="../index.php"> Lomake</a>
-            <a href="otayhteytta.html"> Ota yhteyttä</a>
-            <a href="my_projects.php">My Projects</a>
-            <a href="login.html"> Kirjaudu sisään</a>
+            <a href="/lomake"> Lomake</a>
+            <a href="/ota-yhteytta"> Ota yhteyttä</a>
+            <a href="/omat-projektit">My Projects</a>
+            <a href="/kirjaudu"> Kirjaudu sisään</a>
         </nav>
 
     </header>

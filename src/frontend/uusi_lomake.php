@@ -11,24 +11,24 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 fw-semibold sticky-top">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="uusi_main.php">Projektitori</a>
+                    <a class="navbar-brand" href="/etusivu">Projektitori</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-normal">
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="uusi_lomake.php">Lomake</a>
+                        <a class="nav-link active" aria-current="page" href="/lomake">Lomake</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="hallinta.php">Projektien hallinta</a>
+                        <a class="nav-link" href="/hallinta">Projektien hallinta</a>
                         </li>
                         <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Opettajan nimi
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="logout.php">Kirjaudu ulos</a></li>
+                            <li><a class="dropdown-item" href="/uloskirjaus">Kirjaudu ulos</a></li>
                             
                     </ul>                                   
                         </li>
@@ -40,7 +40,7 @@
     <div class="container mt-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="breadcrumb-ptori" href="uusi_main.php">Projektitori</a></li>
+                <li class="breadcrumb-item"><a class="breadcrumb-ptori" href="/etusivu">Projektitori</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Lomake</li>
             </ol>
         </nav>

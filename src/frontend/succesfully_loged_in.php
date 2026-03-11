@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // Jos logged_in ei ole totta = siirrää login sivulle
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: /login.html"); 
+    header("Location: /kirjaudu"); 
     exit;
 }
 
@@ -35,12 +35,12 @@ Tulevaisuudessa voisi käyttäjää siirtää toiselle sivulle, jossa olisi sis�
 
 <body>
     <header>
-        <p class="projektitori"> <a href="main.php"> Projektitori</a></p>
+        <p class="projektitori"> <a href="/etusivu"> Projektitori</a></p>
         <nav>
-            <a href="../index.php"> Lomake</a>
-            <a href="otayhteytta.html"> Ota yhteyttä</a>
-            <a href="my_projects.php">My Projects</a>
-            <a href="login.html"> Kirjaudu sisään</a>
+            <a href="/lomake"> Lomake</a>
+            <a href="/ota-yhteytta"> Ota yhteyttä</a>
+            <a href="/omat-projektit">My Projects</a>
+            <a href="/kirjaudu"> Kirjaudu sisään</a>
         </nav>
 
     </header>
@@ -48,6 +48,6 @@ Tulevaisuudessa voisi käyttäjää siirtää toiselle sivulle, jossa olisi sis�
     <h1>Welcome, <?php echo htmlspecialchars($email); ?>!</h1>
     <p>Your role: <?php echo htmlspecialchars($role); ?></p>
 
-    <p><a href="my_projects.php">Go to My Projects</a></p>
+    <p><a href="/omat-projektit">Go to My Projects</a></p>
 </body>
 </html>

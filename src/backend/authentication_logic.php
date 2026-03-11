@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Jos action on Generate, kutsu generateOTPAddUserToDatabase()
     if ($action == 'generate') {
         $otp = generateOTPAddUserToDatabase();
-        $email = $_POST['sahkoposti_login'] ?? '';
+        $email = $_POST['input-email'] ?? '';
         $mailStatusMessage = 'Sähköpostia ei voitu lähettää, mutta OTP-koodi luotiin.';
 
         if ($otp && $email) {
@@ -59,14 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
         
-        echo "$mailStatusMessage<br>";
-        echo "Sinun OTP koodi on: $otp";
+        $_SESSION['auth_mail_status'] = $mailStatusMessage;
+        $_SESSION['auth_debug_otp'] = $otp;
+        header('Location: /vahvistuskoodi?email=' . urlencode($email));
         exit;
     }
     //Jos action on login, kutsu login_check_user()
     if ($action === 'login') {
         login_check_user();
-        header("Location: /virhe.html");
+        exit;
     }
 }
 ?>

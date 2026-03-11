@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 fw-semibold sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="uusi_main.php">Projektitori</a>
+            <a class="navbar-brand" href="/etusivu">Projektitori</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,7 +26,7 @@
                 <form action="/backend/authentication_logic.php" method="post">
                     <div class="form-group mb-3">
                         <label for="inputEmail" class="form-label">Sähköposti</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                        <input type="email" class="form-control" id="inputEmail" name="input-email" placeholder="name@example.com" required>
                     </div>
                     <button type="submit" name="action" value="generate" class="btn-laheta px-5 py-2">Lähetä koodi</button>
                 </form>
